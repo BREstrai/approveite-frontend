@@ -1,0 +1,7 @@
+<div class="container-input">
+    <ng-content></ng-content>
+
+    <mat-error *ngIf="hasError()">
+        {{ showValidations() }}
+    </mat-error>
+</div>

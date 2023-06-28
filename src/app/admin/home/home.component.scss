@@ -1,0 +1,42 @@
+.container-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container-drawer {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.container-content {
+  padding: 20px;
+}
+
+.menu-side {
+  padding-left: 24px;
+  min-width: 250px;
+}
+
+.nav-group-title {
+  padding: 16px 0 0 0;
+  font-size: 12px;
+  margin: 0;
+  color: #B3B3B3;
+}
+
+.mat-list-item {
+  color: #4D4D4D;
+  height: 42px !important;
+
+  &.active {
+    color: #2c6caf;
+  }
+}
+
+.fixed-bottom-info {
+  position: fixed;
+  bottom: 0;
+  left: 50px;
+}

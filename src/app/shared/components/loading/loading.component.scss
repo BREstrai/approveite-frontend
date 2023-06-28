@@ -1,0 +1,28 @@
+.background {
+  outline: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  > div {
+    margin-top: 20%;
+  }
+
+}
+
+.titulo-loading {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 1em;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.progress-spinner-container {
+  display: flex;
+  justify-content: center;
+}

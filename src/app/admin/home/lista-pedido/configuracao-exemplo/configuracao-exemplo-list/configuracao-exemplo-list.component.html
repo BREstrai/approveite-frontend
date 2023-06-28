@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-title class="text-center">Lista de Pedidos</mat-card-title>
+    <mat-card-content>
+        <mat-table [dataSource]="configuracoes">
+            <ng-container matColumnDef="empresa">
+                <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.idEmpresa}} - {{element.dsEmpresa}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fgReciboDigital">
+                <mat-header-cell *matHeaderCellDef> Utiliza Recibo de Entrega Eletrônico </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.fgReciboDigital ? 'Sim' : 'Não'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="opcoes">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button type="button" (click)="edit(element.idEmpresa)" matTooltip="Editar" matTooltipPosition="below">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <app-empty-table *ngIf="showEmpty"></app-empty-table>
+    </mat-card-content>
+</mat-card>

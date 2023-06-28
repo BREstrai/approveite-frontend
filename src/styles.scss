@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.mat-form-field-label,
+.mat-form-field-required-marker {
+  color: rgba(0,0,0,.54) !important;
+}
+
+.message-bar button {
+  color: white;
+}
+
+.logo {
+  letter-spacing: 2px;
+}
+
+.logo-ciss {
+  font-family: Nunito, sans-serif !important;
+  font-size: 26px;
+}
+
+.container-input > .mat-form-field {
+  width: 100% !important;
+}
+
+.check-custom {
+  min-height: 40px;
+}

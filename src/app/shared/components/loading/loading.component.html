@@ -1,0 +1,11 @@
+<div class="background" *ngIf="visible">
+  <div>
+    <label class="titulo-loading">{{message}}</label>
+    <div class="progress-spinner-container">
+      <mat-progress-spinner
+        [mode]="mode"
+        [value]="value">
+      </mat-progress-spinner>
+    </div>
+  </div>
+</div>
