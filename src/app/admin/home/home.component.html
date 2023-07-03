@@ -1,17 +1,31 @@
 <div class="container-main">
     <mat-toolbar color="primary" class="justify-content-between">
-        <span class="logo"><strong class="logo-ciss">APPROVEITE</strong></span>
+        <span class="logo"><strong class="">APPROVEITE</strong></span>
         <button mat-icon-button type="button" (click)="logOut()" matTooltip="Sair" matTooltipPosition="above">
             <mat-icon>login</mat-icon>
         </button>
     </mat-toolbar>
     <mat-drawer-container class="container-drawer">
         <mat-drawer class="menu-side" mode="side" opened>
+            <p class="nav-group-title" matLine>Empresa</p>
+            <mat-nav-list>
+                <a mat-list-item routerLink="/admin/empresa" routerLinkActive="active">
+                    <mat-icon mat-list-icon>receipt_long</mat-icon>
+                    <p mat-line>Configurações da Empresa</p>
+                </a>
+            </mat-nav-list>
             <p class="nav-group-title" matLine>Pedidos</p>
             <mat-nav-list>
-                <a mat-list-item routerLink="/admin/lista-pedido" routerLinkActive="active">
+                <a mat-list-item routerLink="/admin/pedido" routerLinkActive="active">
                     <mat-icon mat-list-icon>receipt_long</mat-icon>
-                    <p mat-line>Lista de Pedidos</p>
+                    <p mat-line>Pedidos</p>
+                </a>
+            </mat-nav-list>
+            <p class="nav-group-title" matLine>Produtos</p>
+            <mat-nav-list>
+                <a mat-list-item routerLink="/admin/produto" routerLinkActive="active">
+                    <mat-icon mat-list-icon>receipt_long</mat-icon>
+                    <p mat-line>Cadastro de Produtos</p>
                 </a>
             </mat-nav-list>
             <app-app-info class="fixed-bottom-info"></app-app-info>

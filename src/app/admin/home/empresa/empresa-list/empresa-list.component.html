@@ -1,15 +1,10 @@
 <mat-card>
-    <mat-card-title class="text-center">Lista de Pedidos</mat-card-title>
+    <mat-card-title class="text-center">Lista de Clientes</mat-card-title>
     <mat-card-content>
-        <mat-table [dataSource]="configuracoes">
+        <mat-table [dataSource]="empresas">
             <ng-container matColumnDef="empresa">
                 <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.idEmpresa}} - {{element.dsEmpresa}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="fgReciboDigital">
-                <mat-header-cell *matHeaderCellDef> Utiliza Recibo de Entrega Eletrônico </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.fgReciboDigital ? 'Sim' : 'Não'}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="opcoes">

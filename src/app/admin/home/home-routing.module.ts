@@ -1,15 +1,22 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-
 const routes: Routes = [
     {
-        path: 'lista-pedido',
-        loadChildren: () => import('./lista-pedido/lista-pedido.module').then(module => module.ListaPedidoModule)
+        path: 'empresa',
+        loadChildren: () => import('./empresa/empresa.module').then(module => module.EmpresaModule)
+    },
+    {
+        path: 'pedido',
+        loadChildren: () => import('./pedido/pedido.module').then(module => module.PedidoModule)
+    },
+    {
+        path: 'produto',
+        loadChildren: () => import('./produto/produto.module').then(module => module.ProdutoModule)
     },
     {
         path: '',
-        redirectTo: 'lista-pedido',
+        redirectTo: 'pedido',
         pathMatch: 'full'
     },
     {

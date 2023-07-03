@@ -1,30 +1,29 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ConfiguracaoExemplo} from './configuracao-exemplo.domain';
+import {Empresa} from './empresa.domain';
 
 @Injectable()
-export class ConfiguracaoExemploService {
+export class EmpresaService {
 
     private readonly URL_API = environment.api_url + '/configuracao/recibo/digital';
 
     constructor(private http: HttpClient) {
     }
 
-    findAll(): Observable<ConfiguracaoExemplo[]> {
+    findAll(): Observable<Empresa[]> {
         // mock exemplo
-        let mock: ConfiguracaoExemplo;
-        let mockList: ConfiguracaoExemplo[];
+        let mock: Empresa;
+        let mockList: Empresa[];
         mockList = [];
-        mock = new  ConfiguracaoExemplo ();
+        mock = new  Empresa ();
         mock.dsEmpresa = 'Empresa Mock';
-        mock.fgReciboDigital = false;
         mock.idEmpresa = 1;
 
         mockList.push(mock);
 
-        const simpleObservable = new Observable<ConfiguracaoExemplo[]>((observer) => {
+        const simpleObservable = new Observable<Empresa[]>((observer) => {
             observer.next(mockList);
             observer.complete();
         });
@@ -32,16 +31,15 @@ export class ConfiguracaoExemploService {
         return simpleObservable;
     }
 
-    findOne(id: number): Observable<ConfiguracaoExemplo> {
+    findOne(id: number): Observable<Empresa> {
 
         // mock de exemplo
-        let mock: ConfiguracaoExemplo;
-        mock = new  ConfiguracaoExemplo ();
+        let mock: Empresa;
+        mock = new  Empresa();
         mock.dsEmpresa = 'Empresa Mock';
-        mock.fgReciboDigital = false;
         mock.idEmpresa = 1;
 
-        const simpleObservable = new Observable<ConfiguracaoExemplo>((observer) => {
+        const simpleObservable = new Observable<Empresa>((observer) => {
             observer.next(mock);
             observer.complete();
         });
@@ -49,7 +47,7 @@ export class ConfiguracaoExemploService {
         return simpleObservable;
     }
 
-    save(domain: ConfiguracaoExemplo): Observable<any> {
+    save(domain: Empresa): Observable<any> {
         return this.http.post<any>(this.URL_API, domain);
     }
 

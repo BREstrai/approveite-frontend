@@ -12,11 +12,11 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (this.authenticationService.hasToken()) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${this.authenticationService.getToken()}`
-                }
-            });
+            //request = request.clone({
+            //    setHeaders: {
+            //        Authorization: `Bearer ${this.authenticationService.getToken()}`
+            //    }
+            //});
         }
 
         return next.handle(request).pipe(tap(() => {}, err => {

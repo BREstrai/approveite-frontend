@@ -1,0 +1,9 @@
+<mat-card>
+    <mat-card-title class="text-center">Lista de Produtos</mat-card-title>
+    <mat-card-content>
+        <mat-table [dataSource]="produtos">
+    
+        </mat-table>
+        <app-empty-table *ngIf="showEmpty"></app-empty-table>
+    </mat-card-content>
+</mat-card>

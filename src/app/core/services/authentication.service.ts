@@ -19,6 +19,7 @@ export class AuthenticationService {
     }
 
     setToken(token): void {
+        console.log(token);
         window.localStorage.setItem(KEY, token);
     }
 
