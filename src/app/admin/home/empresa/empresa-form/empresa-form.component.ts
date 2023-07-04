@@ -20,14 +20,12 @@ export class EmpresaFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.empresaForm = this.fb.group({
-            idEmpresa: [null, Validators.required],
-            dsEmpresa: [null]
-        });
-        const empresa = this.route.snapshot.data.empresa;
-        this.empresaForm.reset(empresa);
-        this.empresaForm.controls.dsEmpresa.setValue(`${empresa.idEmpresa} - ${empresa.dsEmpresa}`);
-        this.empresaForm.controls.dsEmpresa.disable();
+        this.route.params.subscribe(params => {
+            const idEmpresa = +params['idEmpresa'];
+            this.empresaServie.findOne(idEmpresa).subscribe(empresa => {
+                this.empresaForm.patchValue([empresa]);
+            });
+          });
     }
 
     save(): void {

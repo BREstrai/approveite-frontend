@@ -4,14 +4,19 @@
         <mat-table [dataSource]="empresas">
             <ng-container matColumnDef="empresa">
                 <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.idEmpresa}} - {{element.dsEmpresa}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.idEmpresa}} - {{element.descricao}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="cnpj">
+                <mat-header-cell *matHeaderCellDef> CNPJ </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.cnpj}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="opcoes">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <button mat-icon-button type="button" (click)="edit(element.idEmpresa)" matTooltip="Editar" matTooltipPosition="below">
-                        <mat-icon>edit</mat-icon>
+                        <mat-icon>visibility</mat-icon>
                     </button>
                 </mat-cell>
             </ng-container>

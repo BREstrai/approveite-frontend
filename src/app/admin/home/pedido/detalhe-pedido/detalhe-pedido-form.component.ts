@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from '../../../../shared/services/message.service';
-import Decimal from 'decimal.js';
 
 @Component({
     templateUrl: './detalhe-pedido-form.component.html',
@@ -24,9 +23,9 @@ export class DetalhePedidoFormComponent implements OnInit {
             idPedido: [null, Validators.required],
             idKit: [null, Validators.required],
             idProduto: [null, Validators.required],
-            valUnitario: new Decimal(0),
-            valDesconto: new Decimal(0),
-            qtdItem: new Decimal(0)
+            valUnitario: [null, Validators.required],
+            valDesconto: [null, Validators.required],
+            qtdItem: [null, Validators.required],
         });
         const configuracao = this.route.snapshot.data.configuracao;
         this.detalhePedidoForm.reset(configuracao);

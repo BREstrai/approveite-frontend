@@ -45,8 +45,16 @@ export class LoginComponent implements OnInit {
         this.loading.start('Carregando');
 
         this.loginService.logOn(this.loginForm.value).pipe(tap(res => {
-            const authToken = res.headers.get('Authorization');
+            
+            let authToken = res.body.acess_token;
             this.authenticationService.setToken(authToken);
+
+            let idUsuario = res.body.idUsuario;
+            localStorage.setItem('idUsuario', idUsuario);
+
+            let idEmpresa = res.body.idEmpresa;
+            localStorage.setItem('idEmpresa', idEmpresa);
+            
         })).subscribe(value => {
             this.loading.done();
             this.router.navigate([this.navigateTo]);

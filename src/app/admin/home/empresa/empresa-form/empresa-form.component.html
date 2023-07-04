@@ -1,16 +1,98 @@
 <mat-card>
-    <mat-card-title class="text-center">Configuração Exemplo</mat-card-title>
+    <mat-card-title class="text-center">Configuração da Empresa</mat-card-title>
     <mat-card-content>
-        <form [formGroup]="empresaForm">
+      <div class="form-container">
+        <form [formGroup]="empresaForm" class="flex-container">
+          <div class="form-container form-container-left">
+            
             <app-input name="Empresa">
-                <mat-form-field>
-                    <input matInput placeholder="Empresa" formControlName="dsEmpresa">
-                </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Empresa" formControlName="descricao">
+              </mat-form-field>
             </app-input>
+    
+            <app-input name="Complemento">
+              <mat-form-field>
+                <input matInput placeholder="Complemento" formControlName="complemento">
+              </mat-form-field>
+            </app-input>
+    
+            <app-input name="CEP">
+              <mat-form-field>
+                <input matInput placeholder="CEP" formControlName="cep">
+              </mat-form-field>
+            </app-input>
+
+            <app-input name="Horário Abertura">
+                <mat-form-field>
+                  <input matInput placeholder="Horário Abertura" formControlName="hrAbre">
+                </mat-form-field>
+              </app-input>
+
+            <app-input name="Número">
+              <mat-form-field>
+                <input matInput placeholder="Número" formControlName="numero">
+              </mat-form-field>
+            </app-input>
+
+            <app-input name="Telefone 1">
+                <mat-form-field>
+                  <input matInput placeholder="Telefone 1" formControlName="fone1">
+                </mat-form-field>
+              </app-input>
+      
+              <app-input name="Telefone 2">
+                <mat-form-field>
+                  <input matInput placeholder="Telefone 2" formControlName="fone2">
+                </mat-form-field>
+              </app-input>
+          </div>
+
+          
+    
+          <div class="form-container form-container-right">
+            <app-input name="CNPJ">
+                <mat-form-field>
+                  <input matInput placeholder="CNPJ" formControlName="cnpj" mask="00.000.000/0000-00">
+                </mat-form-field>
+              </app-input>
+
+            <app-input name="Logradouro">
+              <mat-form-field>
+                <input matInput placeholder="Logradouro" formControlName="logradouro">
+              </mat-form-field>
+            </app-input>
+    
+            <app-input name="Bairro">
+              <mat-form-field>
+                <input matInput placeholder="Bairro" formControlName="bairro">
+              </mat-form-field>
+            </app-input>
+    
+            <app-input name="Horário Fechamento">
+              <mat-form-field>
+                <input matInput placeholder="Horário Fechamento" formControlName="hrFecha">
+              </mat-form-field>
+            </app-input>
+    
+            <app-input name="Status">
+              <mat-form-field>
+                <input matInput placeholder="Status" formControlName="status">
+              </mat-form-field>
+            </app-input>
+    
+            <app-input name="Taxa de Entrega">
+              <mat-form-field>
+                <input matInput placeholder="Taxa de Entrega" formControlName="taxaEntrega">
+              </mat-form-field>
+            </app-input>
+          </div>
         </form>
+      </div>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button mat-stroked-button type="button" class="btn" (click)="back()">Cancelar</button>
-        <button mat-stroked-button type="button" class="btn btn-primary" (click)="save()">Salvar</button>
+      <button mat-stroked-button type="button" class="btn" (click)="back()">Cancelar</button>
+      <button mat-stroked-button type="button" class="btn btn-primary" (click)="save()">Salvar</button>
     </mat-card-actions>
-</mat-card>
+  </mat-card>
+  

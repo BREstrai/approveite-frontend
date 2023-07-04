@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {EmpresaService} from '../empresa.service';
 import {Empresa} from '../empresa.domain';
 import {ActivatedRoute, Router} from '@angular/router';
-import {finalize} from 'rxjs/operators';
 
 @Component({
     templateUrl: './empresa-list.component.html',
@@ -10,8 +9,9 @@ import {finalize} from 'rxjs/operators';
 })
 export class EmpresaListComponent implements OnInit {
 
-    displayedColumns: string[] = ['empresa', 'opcoes'];
+    displayedColumns: string[] = ['empresa', 'cnpj', 'opcoes'];
     empresas: Empresa[] = [];
+    idEmpresa: number;
     showEmpty = false;
 
     constructor(private router: Router,
@@ -20,10 +20,12 @@ export class EmpresaListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.empresaService.findAll()
-            .pipe(finalize(() => this.showEmpty = this.empresas.length === 0))
-            .subscribe(value => this.empresas = value);
-    }
+        this.idEmpresa = +localStorage.getItem('idEmpresa');
+    
+        this.empresaService.findOne(this.idEmpresa).subscribe(empresa => {
+          this.empresas = [empresa];
+        });
+      }
 
     edit(idEmpresa: number): void {
         this.router.navigate([idEmpresa], {relativeTo: this.route});
