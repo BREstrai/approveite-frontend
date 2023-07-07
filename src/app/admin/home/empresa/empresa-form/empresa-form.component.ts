@@ -15,21 +15,38 @@ export class EmpresaFormComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private route: ActivatedRoute,
                 private router: Router,
-                private empresaServie: EmpresaService,
+                private empresaService: EmpresaService,
                 private messageService: MessageService) {
     }
 
     ngOnInit(): void {
-        this.route.params.subscribe(params => {
-            const idEmpresa = +params['idEmpresa'];
-            this.empresaServie.findOne(idEmpresa).subscribe(empresa => {
-                this.empresaForm.patchValue([empresa]);
-            });
-          });
+        this.empresaForm = this.fb.group({
+            idEmpresa: [null, Validators.required],            
+            complemento: [null, Validators.required],
+            cnpj: [null, Validators.required],
+            cep: [null, Validators.required],
+            numero: [null, Validators.required],
+            logradouro: [null, Validators.required],
+            bairro: [null, Validators.required],
+            descricao: [null, Validators.required],
+            fone1: [null, Validators.required],
+            fone2: [null, Validators.required],
+            hrAbre: [null, Validators.required],
+            hrFecha: [null, Validators.required],
+            status: [null, Validators.required],
+            taxaEntrega: [null, Validators.required],
+        });
+
+        const empresa = this.route.snapshot.data.empresa;
+        console.log(empresa);
+        if (empresa) {
+            this.empresaForm.reset(empresa);
+        }
+
     }
 
     save(): void {
-        this.empresaServie.save(this.empresaForm.value)
+        this.empresaService.save(this.empresaForm.value)
             .subscribe(() => {
                 this.messageService.show('Empresa salva com sucesso');
                 this.back();
@@ -37,7 +54,7 @@ export class EmpresaFormComponent implements OnInit {
     }
 
     back(): void {
-        this.router.navigate(['/admin/empresa', 'empresa']);
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
 }

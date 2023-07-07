@@ -27,8 +27,8 @@ export class EmpresaListComponent implements OnInit {
         });
       }
 
-    edit(idEmpresa: number): void {
-        this.router.navigate([idEmpresa], {relativeTo: this.route});
+    edit(empresa: Empresa): void {
+        this.router.navigate(['./', empresa.idEmpresa], {relativeTo: this.route});
     }
 
 }

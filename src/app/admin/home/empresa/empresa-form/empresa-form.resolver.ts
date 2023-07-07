@@ -11,7 +11,7 @@ export class EmpresaFormResolver implements Resolve<Empresa> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Empresa> {
-        return this.empresaService.findOne(route.params.id);
+        return this.empresaService.findOne(route.params.idEmpresa);
     }
 
 }

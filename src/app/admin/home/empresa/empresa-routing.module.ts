@@ -18,10 +18,10 @@ const routes: Routes = [
                 component: EmpresaListComponent
             },
             {
-                path: ':id',
+                path: ':idEmpresa',
                 component: EmpresaFormComponent,
                 resolve: {
-                    configuracao: EmpresaFormResolver
+                    empresa: EmpresaFormResolver
                 }
             }
         ]

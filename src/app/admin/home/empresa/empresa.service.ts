@@ -17,7 +17,7 @@ export class EmpresaService {
       }
 
     save(domain: Empresa): Observable<Empresa> {
-        return this.http.post(this.URL_API, domain) as Observable<Empresa>;
+        return this.http.put(this.URL_API.concat('/update') , domain) as Observable<Empresa>;
     }
 
 }
