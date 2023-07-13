@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
         this.loginService.logOn(this.loginForm.value).pipe(tap(res => {
             
-            let authToken = res.body.acess_token;
+            let authToken = res.body.access_token;
             this.authenticationService.setToken(authToken);
 
             let idUsuario = res.body.idUsuario;

@@ -23,17 +23,17 @@ export class EmpresaFormComponent implements OnInit {
         this.empresaForm = this.fb.group({
             idEmpresa: [null, Validators.required],            
             complemento: [null, Validators.required],
-            cnpj: [null, Validators.required],
+            cnpj: [{ value: null, disabled: true }],
             cep: [null, Validators.required],
             numero: [null, Validators.required],
             logradouro: [null, Validators.required],
             bairro: [null, Validators.required],
-            descricao: [null, Validators.required],
+            descricao: [{ value: null, disabled: true }],
             fone1: [null, Validators.required],
             fone2: [null, Validators.required],
             hrAbre: [null, Validators.required],
             hrFecha: [null, Validators.required],
-            status: [null, Validators.required],
+            status:  [{ value: null, disabled: true }],
             taxaEntrega: [null, Validators.required],
         });
 

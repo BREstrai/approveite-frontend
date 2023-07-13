@@ -5,9 +5,15 @@
       <form [formGroup]="empresaForm">
         <div class="row">
           
-          <app-input name="Empresa" class="col-6">
+          <app-input name="Empresa" class="col-8">
             <mat-form-field>
               <input matInput placeholder="Empresa" formControlName="descricao">
+            </mat-form-field>
+          </app-input>
+
+          <app-input name="CNPJ" class="col-4">
+            <mat-form-field>
+              <input matInput placeholder="CNPJ" formControlName="cnpj">
             </mat-form-field>
           </app-input>
   
@@ -17,71 +23,64 @@
             </mat-form-field>
           </app-input>
   
-          <app-input name="CEP" class="col-4">
+          <app-input name="CEP" class="col-6">
             <mat-form-field>
               <input matInput placeholder="CEP" formControlName="cep">
             </mat-form-field>
           </app-input>
 
-          <app-input name="Horário Abertura" class="col-4">
-              <mat-form-field>
-                <input matInput placeholder="Horário Abertura" formControlName="hrAbre">
-              </mat-form-field>
-            </app-input>
-
-          <app-input name="Número" class="col-4">
+          <app-input name="Bairro" class="col-6">
             <mat-form-field>
-              <input matInput placeholder="Número" formControlName="numero">
+              <input matInput placeholder="Bairro" formControlName="bairro">
+            </mat-form-field>
+          </app-input>
+
+          <app-input name="Número" class="col-6">
+            <mat-form-field>
+              <input matInput type="number" placeholder="Número" formControlName="numero">
+            </mat-form-field>
+          </app-input>
+
+          <app-input name="Logradouro" class="col-6">
+            <mat-form-field>
+              <input matInput placeholder="Logradouro" formControlName="logradouro">
+            </mat-form-field>
+          </app-input>
+
+          <app-input name="Taxa de Entrega" class="col-6">
+            <mat-form-field>
+              <input matInput type="text" placeholder="Taxa de Entrega" formControlName="taxaEntrega">
+            </mat-form-field>
+          </app-input>
+
+          <app-input name="Horário Abertura" class="col-6">
+            <mat-form-field>
+              <input matInput type="time" placeholder="Horário Abertura" formControlName="hrAbre">
+            </mat-form-field>
+          </app-input>
+
+          <app-input name="Horário Fechamento" class="col-6">
+            <mat-form-field>
+              <input matInput type="time" placeholder="Horário Fechamento" formControlName="hrFecha">
             </mat-form-field>
           </app-input>
 
           <app-input name="Telefone 1" class="col-4">
               <mat-form-field>
-                <input matInput placeholder="Telefone 1" formControlName="fone1">
+                <input matInput type="tel" placeholder="Telefone 1" formControlName="fone1">
               </mat-form-field>
           </app-input>
     
-            <app-input name="Telefone 2">
-              <mat-form-field>
-                <input matInput placeholder="Telefone 2" formControlName="fone2">
-              </mat-form-field>
-            </app-input>
-        
-          <app-input name="CNPJ">
-              <mat-form-field>
-                <input matInput placeholder="CNPJ" formControlName="cnpj" mask="00.000.000/0000-00">
-              </mat-form-field>
-            </app-input>
+          <app-input name="Telefone 2" class="col-4">
+            <mat-form-field>
+              <input matInput placeholder="Telefone 2" formControlName="fone2">
+            </mat-form-field>
+          </app-input>
+  
+          <app-input name="Status" class="col-12">
+            <mat-checkbox formControlName="status">Empresa Ativa</mat-checkbox>
+          </app-input>
 
-          <app-input name="Logradouro">
-            <mat-form-field>
-              <input matInput placeholder="Logradouro" formControlName="logradouro">
-            </mat-form-field>
-          </app-input>
-  
-          <app-input name="Bairro">
-            <mat-form-field>
-              <input matInput placeholder="Bairro" formControlName="bairro">
-            </mat-form-field>
-          </app-input>
-  
-          <app-input name="Horário Fechamento">
-            <mat-form-field>
-              <input matInput placeholder="Horário Fechamento" formControlName="hrFecha">
-            </mat-form-field>
-          </app-input>
-  
-          <app-input name="Status">
-            <mat-form-field>
-              <input matInput placeholder="Status" formControlName="status">
-            </mat-form-field>
-          </app-input>
-  
-          <app-input name="Taxa de Entrega">
-            <mat-form-field>
-              <input matInput placeholder="Taxa de Entrega" formControlName="taxaEntrega">
-            </mat-form-field>
-          </app-input>
         </div>
       </form>
 

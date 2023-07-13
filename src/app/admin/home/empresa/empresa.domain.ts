@@ -11,6 +11,6 @@ export class Empresa {
     fone2: string;
     hrAbre: string;
     hrFecha: string;
-    status: number;
+    status: boolean;
     taxaEntrega: string;
 }
