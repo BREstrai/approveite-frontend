@@ -2,7 +2,39 @@
     <mat-card-title class="text-center">Lista de Produtos</mat-card-title>
     <mat-card-content>
         <mat-table [dataSource]="produtos">
-    
+            <ng-container matColumnDef="idProduto">
+                <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.idProduto}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="descricao">
+                <mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.descricao}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="valorUn">
+                <mat-header-cell *matHeaderCellDef> Preço </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.valorUn}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="qtdDisponivel">
+                <mat-header-cell *matHeaderCellDef> Quantidade Disponpivel </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.qtdDisponivel}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="idProdutoExterno">
+                <mat-header-cell *matHeaderCellDef> Código ERP </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.idProdutoExterno}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="acoes">
+                <mat-header-cell *matHeaderCellDef> Visualizar </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-center">
+                    <div>
+                        <button mat-button (click)="edit(element.idProduto)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
         <app-empty-table *ngIf="showEmpty"></app-empty-table>
     </mat-card-content>

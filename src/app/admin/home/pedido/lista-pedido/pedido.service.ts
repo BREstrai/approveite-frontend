@@ -15,7 +15,7 @@ export class PedidoService {
     }
 
     findAll(): Observable<Pedido[]> {
-        return this.http.get(this.URL_API.concat('/findAllPedidos')) as Observable<Pedido[]>;
+        return this.http.get(this.URL_API.concat('/findAll')) as Observable<Pedido[]>;
     }
 
     findOne(id: number): Observable<Pedido> {

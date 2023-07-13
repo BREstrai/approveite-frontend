@@ -49,7 +49,8 @@
 
           <app-input name="Taxa de Entrega" class="col-6">
             <mat-form-field>
-              <input matInput type="text" placeholder="Taxa de Entrega" formControlName="taxaEntrega">
+              <input matInput mask="'separator.2'" separatorLimit="10000000" type="number" placeholder="Taxa de Entrega" formControlName="taxaEntrega">
+
             </mat-form-field>
           </app-input>
 

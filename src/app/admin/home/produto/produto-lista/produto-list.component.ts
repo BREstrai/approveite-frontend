@@ -10,7 +10,7 @@ import { ProdutoService } from '../produto.service';
 })
 export class ProdutoListComponent implements OnInit {
 
-    displayedColumns: string[] = [];
+    displayedColumns: string[] = ['idProduto', 'descricao', 'idProdutoExterno', 'qtdDisponivel', 'valorUn', 'acoes'];
     produtos: Produto[] = [];
     showEmpty = false;
 

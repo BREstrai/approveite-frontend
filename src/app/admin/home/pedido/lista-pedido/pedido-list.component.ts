@@ -16,11 +16,11 @@ export class PedidoListaComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private reciboDigitalService: PedidoService) {
+                private pedidoService: PedidoService) {
     }
 
     ngOnInit(): void {
-        this.reciboDigitalService.findAll()
+        this.pedidoService.findAll()
             .pipe(finalize(() => this.showEmpty = this.pedidos.length === 0))
             .subscribe(value => this.pedidos = value);
     }
@@ -30,7 +30,7 @@ export class PedidoListaComponent implements OnInit {
     }
 
     alterarStatusPedido(idPedido: number, statusPedido: string): void {
-        this.reciboDigitalService.alterarStatusPedido(idPedido, statusPedido)
+        this.pedidoService.alterarStatusPedido(idPedido, statusPedido)
             .subscribe(() => {
                 this.ngOnInit();
             });

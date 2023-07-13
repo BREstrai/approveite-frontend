@@ -13,7 +13,7 @@ export class ProdutoService {
     }
 
     findAll(): Observable<Produto[]> {
-        return this.http.get(this.URL_API.concat('/findAllProdutos')) as Observable<Produto[]>;
+        return this.http.get(this.URL_API.concat('/findAll')) as Observable<Produto[]>;
     }
 
     findOne(id: number): Observable<Produto> {
