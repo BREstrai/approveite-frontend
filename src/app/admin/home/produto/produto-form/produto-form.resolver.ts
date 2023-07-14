@@ -7,12 +7,11 @@ import { ProdutoService } from '../produto.service';
 @Injectable()
 export class ProdutoFormResolver implements Resolve<Produto> {
 
-    constructor(private configuracaoReciboDigitalService: ProdutoService) {
+    constructor(private produtoService: ProdutoService) {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Produto> {
-        // @ts-ignore
-        return this.configuracaoReciboDigitalService.findOne(route.params.id);
+        return this.produtoService.findOne(route.params.idProduto);
     }
 
 }

@@ -1,36 +1,36 @@
 .background-container {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  background-image: url("~src/assets/img/login-background.png");
-  background-size: cover;
-  z-index: 1;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-image: url("~src/assets/img/login-background.png");
+    background-size: cover;
+    z-index: 1;
 }
 
 .card-login {
-  width: 325px;
-  height: 380px;
-  top: 40%;
-  margin-right: 11%;
-  margin-top: -200px;
-  border-radius: 20px;
+    width: 325px;
+    height: 380px;
+    top: 40%;
+    margin-right: 11%;
+    margin-top: -200px;
+    border-radius: 20px;
 }
 
 button {
-  margin-top: 4rem !important;
+    margin-top: 4rem !important;
 }
 
 .div-img-login {
-  text-align: center;
-  padding-bottom: 20px;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 .fixed-bottom-info {
-  position: fixed;
-  bottom: 0;
-  right: 50px;
+    position: fixed;
+    bottom: 0;
+    right: 50px;
 }
 
 .img-login {
-  height: 80px;
+    height: 80px;
 }

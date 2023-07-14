@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MessageService} from '../../../../shared/services/message.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from '../../../../shared/services/message.service';
 import { EmpresaService } from '../empresa.service';
 
 @Component({
@@ -13,27 +13,27 @@ export class EmpresaFormComponent implements OnInit {
     empresaForm: FormGroup;
 
     constructor(private fb: FormBuilder,
-                private route: ActivatedRoute,
-                private router: Router,
-                private empresaService: EmpresaService,
-                private messageService: MessageService) {
+        private route: ActivatedRoute,
+        private router: Router,
+        private empresaService: EmpresaService,
+        private messageService: MessageService) {
     }
 
     ngOnInit(): void {
         this.empresaForm = this.fb.group({
-            idEmpresa: [null, Validators.required],            
+            idEmpresa: [null, Validators.required],
             complemento: [null, Validators.required],
-            cnpj: [{ value: null, disabled: true }],
+            cnpj: [null, Validators.required],
             cep: [null, Validators.required],
             numero: [null, Validators.required],
             logradouro: [null, Validators.required],
             bairro: [null, Validators.required],
-            descricao: [{ value: null, disabled: true }],
+            descricao: [null, Validators.required],
             fone1: [null, Validators.required],
             fone2: [null, Validators.required],
             hrAbre: [null, Validators.required],
             hrFecha: [null, Validators.required],
-            status:  [{ value: null, disabled: true }],
+            status: [null, Validators.required],
             taxaEntrega: [null, Validators.required],
         });
 
@@ -54,7 +54,7 @@ export class EmpresaFormComponent implements OnInit {
     }
 
     back(): void {
-        this.router.navigate(['../'], {relativeTo: this.route});
+        this.router.navigate(['../'], { relativeTo: this.route });
     }
 
 }

@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from './login.service';
-import {AuthenticationService} from '../../core/services/authentication.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MessageService} from '../../shared/services/message.service';
-import {tap} from 'rxjs/operators';
-import {LoadingService} from '../../shared/services/loading.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from './login.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from '../../shared/services/message.service';
+import { tap } from 'rxjs/operators';
+import { LoadingService } from '../../shared/services/loading.service';
 
 @Component({
     templateUrl: './login.component.html',
@@ -19,12 +19,12 @@ export class LoginComponent implements OnInit {
     navigateTo: string;
 
     constructor(private fb: FormBuilder,
-                private loginService: LoginService,
-                private authenticationService: AuthenticationService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private messageService: MessageService,
-                private loading: LoadingService) {
+        private loginService: LoginService,
+        private authenticationService: AuthenticationService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private messageService: MessageService,
+        private loading: LoadingService) {
     }
 
     ngOnInit(): void {
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.loading.start('Carregando');
 
         this.loginService.logOn(this.loginForm.value).pipe(tap(res => {
-            
+
             let authToken = res.body.access_token;
             this.authenticationService.setToken(authToken);
 
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
             let idEmpresa = res.body.idEmpresa;
             localStorage.setItem('idEmpresa', idEmpresa);
-            
+
         })).subscribe(value => {
             this.loading.done();
             this.router.navigate([this.navigateTo]);

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from '../../../../shared/services/message.service';
+import { ProdutoService } from '../produto.service';
 
 @Component({
     templateUrl: './produto-form.component.html',
@@ -14,6 +15,7 @@ export class ProdutoFormComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private route: ActivatedRoute,
                 private router: Router,
+                private produtoService: ProdutoService,
                 private messageService: MessageService) {
     }
 
@@ -30,10 +32,20 @@ export class ProdutoFormComponent implements OnInit {
             valorUn: [null, Validators.required],
             img: [null, Validators.required],
         });
+
+        const produto = this.route.snapshot.data.produto;
+        console.log(produto);
+        if (produto) {
+            this.produtoForm.reset(produto);
+        }
     }
 
     save(): void {
-        this.messageService.show('Produtos salvos com sucesso');
+        this.produtoService.save(this.produtoForm.value)
+        .subscribe(() => {
+            this.messageService.show('Produto salvo com sucesso');
+            this.back();
+        }, error => this.messageService.show(error.error.message));
     }
 
     back(): void {

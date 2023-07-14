@@ -4,7 +4,7 @@ export class Produto {
     idProduto: number;
     descricao: number;
     idProdutoExterno: number;
-    status: number;
+    status: boolean;
     idEmpresa: number;
     idCategoria: number;
     idTipoUnMedida: number;

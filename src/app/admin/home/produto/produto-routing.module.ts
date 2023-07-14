@@ -19,10 +19,10 @@ const routes: Routes = [
                 component: ProdutoListComponent
             },
             {
-                path: ':id',
+                path: ':idProduto',
                 component: ProdutoFormComponent,
                 resolve: {
-                    configuracao: ProdutoFormResolver
+                    produto: ProdutoFormResolver
                 }
             }
         ]

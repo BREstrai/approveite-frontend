@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {EmpresaService} from '../empresa.service';
-import {Empresa} from '../empresa.domain';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { EmpresaService } from '../empresa.service';
+import { Empresa } from '../empresa.domain';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: './empresa-list.component.html',
@@ -15,20 +15,20 @@ export class EmpresaListComponent implements OnInit {
     showEmpty = false;
 
     constructor(private router: Router,
-                private route: ActivatedRoute,
-                private empresaService: EmpresaService) {
+        private route: ActivatedRoute,
+        private empresaService: EmpresaService) {
     }
 
     ngOnInit(): void {
         this.idEmpresa = +localStorage.getItem('idEmpresa');
-    
+
         this.empresaService.findOne(this.idEmpresa).subscribe(empresa => {
-          this.empresas = [empresa];
+            this.empresas = [empresa];
         });
-      }
+    }
 
     edit(empresa: Empresa): void {
-        this.router.navigate(['./', empresa.idEmpresa], {relativeTo: this.route});
+        this.router.navigate(['./', empresa.idEmpresa], { relativeTo: this.route });
     }
 
 }

@@ -20,13 +20,13 @@ export class ProdutoListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.produtoService.findAll()
+        this.produtoService.findAll(1)
             .pipe(finalize(() => this.showEmpty = this.produtos.length === 0))
             .subscribe(value => this.produtos = value);
     }
 
-    edit(idProduto: number): void {
-        this.router.navigate([idProduto], {relativeTo: this.route});
+    edit(produto: Produto): void {
+        this.router.navigate(['./', produto.idProduto], {relativeTo: this.route});
     }
 
 }
