@@ -28,21 +28,36 @@
                         <input matInput placeholder="Valor" formControlName="valorUn">
                     </mat-form-field>
                 </app-input>
-                <app-input name="Tipo Unidade Medida" class="col-6">
-                    <mat-form-field>
-                        <input matInput placeholder="Tipo Unidade Medida" formControlName="idTipoUnMedida">
-                    </mat-form-field>
-                </app-input>
+
+
                 <app-input name="Categoria" class="col-6">
                     <mat-form-field>
-                        <input matInput placeholder="Categoria" formControlName="idCategoria">
+                        <mat-label>Categoria</mat-label>
+                        <mat-select formControlName="idCategoria">
+                            <mat-option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
+                                {{ categoria.descricao }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </app-input>
+                
+                <app-input name="Tipo Unidade Medida" class="col-6">
+                    <mat-form-field>
+                        <mat-label>Tipo Unidade Medida</mat-label>
+                        <mat-select formControlName="idTipoUnMedida">
+                            <mat-option *ngFor="let tipoUnMedida of tiposUnMedidas" [value]="tipoUnMedida.idTipoUnMedida">
+                                {{ tipoUnMedida.descricao }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </app-input>
+
                 <app-input name="Status" class="col-12">
                     <mat-checkbox formControlName="status">Produto Ativa</mat-checkbox>
                 </app-input>
                 <div>
-                    <img [src]="'data:image/jpeg;base64,' +imagemURL" height="300" width="300" alt="Imagem" *ngIf="imagemURL">
+                    <img [src]="'data:image/jpeg;base64,' +imagemURL" height="300" width="300" alt="Imagem"
+                        *ngIf="imagemURL">
                     <label for="file-upload" class="upload-button">
                         Selecionar Imagem
                     </label>

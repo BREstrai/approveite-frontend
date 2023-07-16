@@ -15,7 +15,7 @@ export class ProdutoFormComponent implements OnInit {
     produtoForm: FormGroup;
     imagemURL: string;
     categorias: Categoria[];
-    tiposUnMedida: UnidadeMedida[];
+    tiposUnMedidas: UnidadeMedida[];
 
     constructor(private fb: FormBuilder,
         private route: ActivatedRoute,
@@ -38,10 +38,15 @@ export class ProdutoFormComponent implements OnInit {
             img: [null, Validators.required],
         });
 
+        this.loadCategorias();
+        this.loadTiposUnMedida();
+
         const produto = this.route.snapshot.data.produto;
         if (produto) {
             this.produtoForm.reset(produto);
             this.imagemURL = produto.img;
+            this.produtoForm.get('idCategoria').setValue(produto.idCategoria);
+            this.produtoForm.get('idTipoUnMedida').setValue(produto.idTipoUnMedida);
         }
     }
 
@@ -63,12 +68,14 @@ export class ProdutoFormComponent implements OnInit {
     loadCategorias(): void {
         this.produtoService.findCategoriaAll().subscribe((categorias: Categoria[]) => {
             this.categorias = categorias;
+            console.log(this.categorias);
         });
     }
 
     loadTiposUnMedida(): void {
         this.produtoService.findUnMedidaAll().subscribe((tiposUnMedida: UnidadeMedida[]) => {
-            this.tiposUnMedida = tiposUnMedida;
+            this.tiposUnMedidas = tiposUnMedida;
+            console.log(this.tiposUnMedidas);
         });
     }
 

@@ -5,12 +5,14 @@ import { ProdutoFormResolver } from './produto-form/produto-form.resolver';
 import { ProdutoService } from './produto.service';
 import { ProdutoListComponent } from './produto-lista/produto-list.component';
 import { ProdutoFormComponent } from './produto-form/produto-form.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [ProdutoListComponent, ProdutoFormComponent],
     imports: [
         SharedModule,
-        ProdutoRoutingModule
+        ProdutoRoutingModule,
+        MatSelectModule
     ],
     providers: [
         ProdutoService,
