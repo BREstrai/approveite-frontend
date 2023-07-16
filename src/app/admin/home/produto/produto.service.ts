@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../../../environments/environment";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Produto } from "./produto.domain";
+import { Categoria } from "../categoria/categoria.domain";
+import { UnidadeMedida } from "../unidademedida/unidade-medida.domain";
 
 @Injectable()
 export class ProdutoService {
@@ -20,6 +22,14 @@ export class ProdutoService {
 
     findOne(idProduto: number): Observable<Produto> {
         return this.http.get(this.URL_API.concat(`/findById/${idProduto}`)) as Observable<Produto>;
+    }
+    
+    findCategoriaAll(): Observable<Categoria[]> {
+        return this.http.get(environment.api_url.concat(`/categoria/findAll/`)) as Observable<Categoria[]>;
+    }
+
+    findUnMedidaAll(): Observable<UnidadeMedida[]> {
+        return this.http.get(environment.api_url.concat(`/unidade-medida/findAll/`)) as Observable<UnidadeMedida[]>;
     }
 
     save(domain: Produto): Observable<Produto> {
