@@ -1,11 +1,8 @@
-<mat-toolbar color="primary">
-    <span class="logo"><strong class="logo">APP</strong>roveite</span>
-</mat-toolbar>
 <mat-drawer-container class="background-container">
     <mat-card class="card-login float-right">
         <form (ngSubmit)="logOn()" [formGroup]="loginForm" class="mt-3">
             <div class="div-img-login">
-                <img class="img-login" src="../../../assets/img/icon-login.png" alt="login">
+                <h3>Painel da Empresa</h3>
             </div>
             <app-input name="Usuário">
                 <mat-form-field appearance="outline">
@@ -13,7 +10,6 @@
                     <mat-icon matSuffix>perm_identity</mat-icon>
                 </mat-form-field>
             </app-input>
-
             <app-input name="Senha">
                 <mat-form-field appearance="outline" class="mt-4">
                     <input matInput placeholder="Informe a senha" formControlName="senha" type="password" required>

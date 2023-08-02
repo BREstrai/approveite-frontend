@@ -1,12 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
-  height: 100%;
+html,
+body {
+    height: 100%;
 }
 
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* Importing Bootstrap SCSS file. */
@@ -14,26 +15,28 @@ body {
 
 .mat-form-field-label,
 .mat-form-field-required-marker {
-  color: rgba(0,0,0,.54) !important;
+    color: rgba(0, 0, 0, .54) !important;
 }
 
 .message-bar button {
-  color: white;
+    color: white;
 }
 
 .logo {
-  letter-spacing: 2px;
+    letter-spacing: 2px;
+    color: rgb(92, 172, 100);
 }
 
 .logo {
-  font-family: Nunito, sans-serif !important;
-  font-size: 26px;
+    font-family: Nunito, sans-serif !important;
+    font-size: 26px;
+    color: #7dace9;
 }
 
-.container-input > .mat-form-field {
-  width: 100% !important;
+.container-input>.mat-form-field {
+    width: 100% !important;
 }
 
 .check-custom {
-  min-height: 40px;
+    min-height: 40px;
 }

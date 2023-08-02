@@ -8,6 +8,7 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  background-color: white;
 }
 
 .container-content {
@@ -31,7 +32,7 @@
   height: 42px !important;
 
   &.active {
-    color: #2c6caf;
+    background-color: rgb(239, 250, 249);
   }
 }
 
