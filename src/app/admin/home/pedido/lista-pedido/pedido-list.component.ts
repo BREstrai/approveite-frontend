@@ -25,18 +25,15 @@ export class PedidoListaComponent implements OnInit {
             .subscribe(value => this.pedidos = value);
     }
 
-    edit(idEmpresa: number): void {
-        this.router.navigate([idEmpresa], {relativeTo: this.route});
+    edit(pedido: Pedido): void {
+        console.log(pedido);
+        this.router.navigate(['./', pedido.idPedido], {relativeTo: this.route});
     }
 
-    alterarStatusPedido(idPedido: number, statusPedido: string): void {
-        this.pedidoService.alterarStatusPedido(idPedido, statusPedido)
-            .subscribe(() => {
-                this.ngOnInit();
-            });
-    }   
-
-
-
-
+    // alterarStatusPedido(idPedido: number, statusPedido: string): void {
+    //     this.pedidoService.alterarStatusPedido(idPedido, statusPedido)
+    //         .subscribe(() => {
+    //             this.ngOnInit();
+    //         });
+    // }   
 }

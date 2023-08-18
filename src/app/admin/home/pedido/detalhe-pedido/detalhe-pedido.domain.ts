@@ -1,8 +1,7 @@
-import { Pedido } from '../lista-pedido/pedido.domain';
-
 export class DetalhePedido {
     idPedidoDetalhe: number;
-    idPedido: Pedido;
+    idPedido: number;
+    descricaoProduto: string;
     idKit: number;
     idProduto: number;
     valUnitario: string;

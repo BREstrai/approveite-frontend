@@ -1,6 +1,51 @@
-<mat-card>
-    <mat-card-title class="text-center">Detalhes do Pedido</mat-card-title>
-    <mat-card-content>
-        <h1>Form</h1>
-    </mat-card-content>
-</mat-card>
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                2023-08-03 - Bruno Rudinei Estrai
+            </mat-panel-title>
+            <mat-panel-description>
+                Total R$255,00
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="panel-content">
+            <label>Local de Entrega:</label>
+            <p>852, Rua José Cleto, Bairro das Torres, Ed. Vista Bela, Ap. 202</p>
+            <br>
+            <div [formGroup]="detalhePedidoForm">
+                <mat-table [dataSource]="listaProd">
+                    <ng-container matColumnDef="idProduto">
+                        <mat-header-cell *matHeaderCellDef>Produto</mat-header-cell>
+                        <mat-cell *matCellDef="let produto">{{ produto.idProduto }}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="descricaoProduto">
+                        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+                        <mat-cell *matCellDef="let produto">{{ produto.descricaoProduto }}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="qtdItem">
+                        <mat-header-cell *matHeaderCellDef>Quantidade</mat-header-cell>
+                        <mat-cell *matCellDef="let produto">{{ produto.qtdItem }}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="valUnitario">
+                        <mat-header-cell *matHeaderCellDef>Valor Unitário</mat-header-cell>
+                        <mat-cell *matCellDef="let produto">{{ produto.valUnitario | currency:'BRL' }}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="valDesconto">
+                        <mat-header-cell *matHeaderCellDef>Desconto</mat-header-cell>
+                        <mat-cell *matCellDef="let produto">{{ produto.valDesconto | currency:'BRL' }}</mat-cell>
+                    </ng-container>
+            
+                    <mat-header-row *matHeaderRowDef="dysplayProd"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: dysplayProd;"></mat-row>
+                </mat-table>
+            </div>
+
+            <label>Forma de Pagamento:</label>
+            <p>Cartão de Crédito</p>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

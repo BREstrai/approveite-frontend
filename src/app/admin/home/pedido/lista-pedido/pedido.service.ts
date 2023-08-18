@@ -5,17 +5,23 @@ import {Observable} from "rxjs";
 import {Pedido} from "./pedido.domain";
 import { AuthenticationService } from "src/app/core/services/authentication.service";
 import { Router } from "@angular/router";
+import { DetalhePedido } from "../detalhe-pedido/detalhe-pedido.domain";
 
 @Injectable()
 export class PedidoService {
 
     private readonly URL_API = environment.api_url + '/pedido';
+    private readonly URL_API_DET = environment.api_url + '/pedido-detalhe';
 
     constructor(private http: HttpClient) {
     }
 
     findAll(): Observable<Pedido[]> {
         return this.http.get(this.URL_API.concat('/findAll')) as Observable<Pedido[]>;
+    }
+    
+    findDetByPedido(idPedido: number): Observable<DetalhePedido[]> {
+        return this.http.get(this.URL_API_DET.concat('/findByIdPedido/'+idPedido)) as Observable<DetalhePedido[]>;
     }
 
     findOne(id: number): Observable<Pedido> {

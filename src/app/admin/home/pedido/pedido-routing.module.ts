@@ -19,10 +19,10 @@ const routes: Routes = [
                 component: PedidoListaComponent
             },
             {
-                path: ':id',
+                path: ':idPedido',
                 component: DetalhePedidoFormComponent,
                 resolve: {
-                    configuracao: DetalhePedidoFormResolver
+                    pedido: DetalhePedidoFormResolver
                 }
             }
         ]

@@ -5,12 +5,14 @@ import { DetalhePedidoFormComponent } from './detalhe-pedido/detalhe-pedido-form
 import { PedidoService } from './lista-pedido/pedido.service';
 import { DetalhePedidoFormResolver } from './detalhe-pedido/detalhe-pedido-form.resolver';
 import { PedidoListaComponent } from './lista-pedido/pedido-list.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     declarations: [DetalhePedidoFormComponent, PedidoListaComponent],
     imports: [
         SharedModule,
-        PedidoRoutingModule
+        PedidoRoutingModule,
+        MatExpansionModule
     ],
     providers: [
         DetalhePedidoFormResolver,
