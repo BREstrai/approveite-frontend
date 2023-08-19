@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {Pedido} from "./pedido.domain";
 import { AuthenticationService } from "src/app/core/services/authentication.service";
 import { Router } from "@angular/router";
-import { DetalhePedido } from "../detalhe-pedido/detalhe-pedido.domain";
+import { PedidoCompleto } from "../pedido-completo.domain";
 
 @Injectable()
 export class PedidoService {
@@ -20,8 +20,8 @@ export class PedidoService {
         return this.http.get(this.URL_API.concat('/findAll')) as Observable<Pedido[]>;
     }
     
-    findDetByPedido(idPedido: number): Observable<DetalhePedido[]> {
-        return this.http.get(this.URL_API_DET.concat('/findByIdPedido/'+idPedido)) as Observable<DetalhePedido[]>;
+    findDetByPedido(idPedido: number): Observable<PedidoCompleto> {
+        return this.http.get(this.URL_API_DET.concat('/findByIdPedido/'+idPedido)) as Observable<PedidoCompleto>;
     }
 
     findOne(id: number): Observable<Pedido> {
