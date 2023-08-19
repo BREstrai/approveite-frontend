@@ -44,6 +44,12 @@
                 </mat-table>
                 <label>Forma de Pagamento:</label>
                 <p>{{ pedidoForm.get('dsFormaPagamento')?.value }}</p>
+                <mat-card-actions>
+                    <button mat-stroked-button type="button" class="btn btn-group" (click)="alterarStatusPedido('PROCESSANDO')">PROCESSANDO</button>
+                    <button mat-stroked-button type="button" class="btn btn-primary" (click)="alterarStatusPedido('ENVIADO')">ENVIADO</button>
+                    <button mat-stroked-button type="button" class="btn btn-info" (click)="alterarStatusPedido('FINALIZADO')">FINALIZADO</button>
+                    <button mat-stroked-button type="button" class="btn btn-danger" (click)="alterarStatusPedido('CANCELADO')">CANCELAR</button>
+                </mat-card-actions>
             </div>
         </mat-expansion-panel>
     </mat-accordion>

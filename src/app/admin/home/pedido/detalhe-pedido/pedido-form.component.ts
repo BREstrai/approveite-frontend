@@ -40,27 +40,39 @@ export class PedidoFormComponent implements OnInit {
             dataPedido: [null, Validators.required],
             dataEntrega: [null, Validators.required],
         });
-        
-    
+
+
         this.route.data.subscribe((data: { pedido: PedidoCompleto }) => {
             const pedidoCompleto: PedidoCompleto = data.pedido;
-        
+
             const pedido: Pedido = pedidoCompleto.pedido;
             const detalhePedido: DetalhePedido[] = pedidoCompleto.pedidoDetalhe;
-        
+
             console.log("Pedido:", pedido);
             this.detalhesPedido = detalhePedido;
             this.pedidoForm.patchValue(pedido);
-        
+
         });
     }
 
-    save(): void {
-        this.messageService.show('Detalhes do pedido salvos com sucesso');
+    alterarStatusPedido(statusPedido: string): void {
+
+        const idPedido = this.pedidoForm.get('idPedido')?.value;
+
+        this.pedidoService.alterarStatusPedido(idPedido, statusPedido).subscribe(
+            () => {
+                
+                this.router.navigate(['/admin/pedido', 'pedido']);
+            },
+            (error) => {            
+                this.messageService.show('Erro ao alterar status do pedido!');
+            }
+        );
+        
     }
 
     back(): void {
-        this.router.navigate(['/admin/configuracao', 'pedido']);
+        this.router.navigate(['/admin/pedido', 'pedido']);
     }
 
 }

@@ -50,7 +50,7 @@ export class PedidoService {
     }
 
     alterarStatusPedido(idPedido: number, statusPedido: string): Observable<any> {
-        return this.http.put<any>(this.URL_API.concat('/'+idPedido+'/'+statusPedido), null);
+        return this.http.put<any>(this.URL_API.concat('/'+idPedido+'/alteraStatus/'+statusPedido), null);
     }
 
 
