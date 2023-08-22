@@ -47,20 +47,40 @@ export class ProdutoFormComponent implements OnInit {
         const produto = this.route.snapshot.data.produto;
         if (produto) {
             this.produtoForm.reset(produto);
-            this.imagemURL = produto.img;
+            this.selectedFile = new File([this.dataURItoBlob(produto.img)], 'filename.jpg', { type: 'image/jpeg', lastModified: Date.now() });
+            console.log("Não", this.selectedFile);
             this.produtoForm.get('idCategoria').setValue(produto.idCategoria);
             this.produtoForm.get('idTipoUnMedida').setValue(produto.idTipoUnMedida);
+
+            const fileReader = new FileReader();
+            fileReader.onload = (event) => {
+                this.selectedFileBase64 = event.target.result as string;
+            };
+            fileReader.readAsDataURL(this.selectedFile);
         }
+    }
+
+    dataURItoBlob(dataURI: string): Blob {
+        const byteString = atob(dataURI);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+
+        for (let i = 0; i < byteString.length; i++) {
+            uint8Array[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([arrayBuffer], { type: 'image/jpeg' }); // Adjust the MIME type as needed
     }
 
     onFileSelected(event: Event): void {
         const inputElement = event.target as HTMLInputElement;
         if (inputElement.files && inputElement.files.length > 0) {
             this.selectedFile = inputElement.files[0];
-    
+
             const reader = new FileReader();
             reader.onload = () => {
-                this.selectedFileBase64 = reader.result as string;
+                this.selectedFileBase64 = reader.result as string
+                console.log("Sim", this.selectedFileBase64);
             };
             reader.readAsDataURL(this.selectedFile);
         } else {
@@ -68,7 +88,7 @@ export class ProdutoFormComponent implements OnInit {
             this.selectedFileBase64 = null;
         }
     }
-    
+
 
     // onFileSelected(event: Event): void {
     //     const inputElement = event.target as HTMLInputElement;
@@ -78,7 +98,7 @@ export class ProdutoFormComponent implements OnInit {
     //         this.selectedFile = null;
     //     }
     // }
-    
+
 
     loadCategorias(): void {
         this.produtoService.findCategoriaAll().subscribe((categorias: Categoria[]) => {
@@ -96,7 +116,7 @@ export class ProdutoFormComponent implements OnInit {
 
     save(): void {
         if (!this.selectedFile) {
-            console.log("Nenhum arquivo selecionado.");
+            this.messageService.show("Nenhuma imagem selecionada");
             return;
         }
 
@@ -112,7 +132,7 @@ export class ProdutoFormComponent implements OnInit {
                 valorUn: this.produtoForm.get('valorUn').value,
                 idCategoria: this.produtoForm.get('idCategoria').value,
                 idTipoUnMedida: this.produtoForm.get('idTipoUnMedida').value,
-                status: this.produtoForm.get('status').value,
+                status: this.produtoForm.get('status')?.value ? true : false,
                 idEmpresa: parseInt(localStorage.getItem('idEmpresa')),
                 img: imagemURL,
             };
@@ -149,6 +169,8 @@ export class ProdutoFormComponent implements OnInit {
     novo(): void {
         this.produtoForm.reset();
         this.imagemURL = null;
+        this.selectedFile = null
+        this.selectedFileBase64 = null;
     }
 
 

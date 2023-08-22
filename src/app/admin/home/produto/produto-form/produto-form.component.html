@@ -63,8 +63,10 @@
                     <label for="file-upload" class="upload-button">
                         Selecionar Imagem
                     </label>
-                    <input id="file-upload" type="file" class="file-input" formControlName="img" (change)="onFileSelected($event)">
+                    <input id="file-upload" type="file" class="file-input" formControlName="img"
+                        [files]="[selectedFile]" (change)="onFileSelected($event)">
                 </div>
+
             </div>
         </form>
     </mat-card-content>
