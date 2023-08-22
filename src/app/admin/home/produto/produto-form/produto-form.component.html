@@ -10,7 +10,8 @@
                 </app-input>
                 <app-input name="Código do ERP" class="col-4">
                     <mat-form-field>
-                        <input matInput placeholder="Código Externo" formControlName="idProdutoExterno" readonly>
+                        <input matInput placeholder="Código Externo" formControlName="idProdutoExterno"
+                            [readonly]="produtoForm.get('idProduto').value !== null">
                     </mat-form-field>
                 </app-input>
                 <app-input name="Descrição" class="col-8">
@@ -40,12 +41,13 @@
                         </mat-select>
                     </mat-form-field>
                 </app-input>
-                
+
                 <app-input name="Tipo Unidade Medida" class="col-6">
                     <mat-form-field>
                         <mat-label>Tipo Unidade Medida</mat-label>
                         <mat-select formControlName="idTipoUnMedida">
-                            <mat-option *ngFor="let tipoUnMedida of tiposUnMedidas" [value]="tipoUnMedida.idTipoUnMedida">
+                            <mat-option *ngFor="let tipoUnMedida of tiposUnMedidas"
+                                [value]="tipoUnMedida.idTipoUnMedida">
                                 {{ tipoUnMedida.descricao }}
                             </mat-option>
                         </mat-select>
@@ -53,16 +55,15 @@
                 </app-input>
 
                 <app-input name="Status" class="col-12">
-                    <mat-checkbox formControlName="status">Produto Ativa</mat-checkbox>
+                    <mat-checkbox formControlName="status">Produto Ativo</mat-checkbox>
                 </app-input>
                 <div>
-                    <img [src]="'data:image/jpeg;base64,' +imagemURL" height="300" width="300" alt="Imagem"
-                        *ngIf="imagemURL">
+                    <img [src]="selectedFileBase64" height="300" width="300" alt="Imagem" *ngIf="selectedFileBase64">
+
                     <label for="file-upload" class="upload-button">
                         Selecionar Imagem
                     </label>
-                    <input id="file-upload" type="file" class="file-input" formControlName="img"
-                        (change)="onFileSelected($event)">
+                    <input id="file-upload" type="file" class="file-input" formControlName="img" (change)="onFileSelected($event)">
                 </div>
             </div>
         </form>
@@ -70,5 +71,8 @@
     <mat-card-actions align="end">
         <button mat-stroked-button type="button" class="btn" (click)="back()">Cancelar</button>
         <button mat-stroked-button type="button" class="btn btn-primary" (click)="save()">Salvar</button>
+        <button mat-fab class="add-product-button" (click)="novo()">
+            <mat-icon>add</mat-icon>
+        </button>
     </mat-card-actions>
 </mat-card>

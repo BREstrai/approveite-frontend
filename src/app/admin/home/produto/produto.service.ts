@@ -37,4 +37,9 @@ export class ProdutoService {
         return this.http.put(this.URL_API.concat('/update'), domain) as Observable<Produto>;
     }
 
+    new(domain: Produto): Observable<Produto> {
+        console.log(domain);
+        return this.http.post(this.URL_API.concat('/create'), domain) as Observable<Produto>;
+    }
+
 }

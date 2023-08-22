@@ -5,6 +5,7 @@ import { MessageService } from '../../../../shared/services/message.service';
 import { ProdutoService } from '../produto.service';
 import { UnidadeMedida } from '../../unidademedida/unidade-medida.domain';
 import { Categoria } from '../../categoria/categoria.domain';
+import { Produto } from '../produto.domain';
 
 @Component({
     templateUrl: './produto-form.component.html',
@@ -16,6 +17,8 @@ export class ProdutoFormComponent implements OnInit {
     imagemURL: string;
     categorias: Categoria[];
     tiposUnMedidas: UnidadeMedida[];
+    selectedFile: File | null = null;
+    selectedFileBase64: string | null = null;
 
     constructor(private fb: FormBuilder,
         private route: ActivatedRoute,
@@ -50,20 +53,32 @@ export class ProdutoFormComponent implements OnInit {
         }
     }
 
-    onFileSelected(event: any): void {
-        const file = event.target.files[0];
-
-        if (file) {
+    onFileSelected(event: Event): void {
+        const inputElement = event.target as HTMLInputElement;
+        if (inputElement.files && inputElement.files.length > 0) {
+            this.selectedFile = inputElement.files[0];
+    
             const reader = new FileReader();
-
-            reader.onloadend = () => {
-                this.imagemURL = reader.result as string;
-                this.imagemURL = this.imagemURL.replace('data:image/jpeg;base64,', '');
+            reader.onload = () => {
+                this.selectedFileBase64 = reader.result as string;
             };
-
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(this.selectedFile);
+        } else {
+            this.selectedFile = null;
+            this.selectedFileBase64 = null;
         }
     }
+    
+
+    // onFileSelected(event: Event): void {
+    //     const inputElement = event.target as HTMLInputElement;
+    //     if (inputElement.files && inputElement.files.length > 0) {
+    //         this.selectedFile = inputElement.files[0];
+    //     } else {
+    //         this.selectedFile = null;
+    //     }
+    // }
+    
 
     loadCategorias(): void {
         this.produtoService.findCategoriaAll().subscribe((categorias: Categoria[]) => {
@@ -80,22 +95,61 @@ export class ProdutoFormComponent implements OnInit {
     }
 
     save(): void {
-
-        if (this.imagemURL) {
-            this.produtoForm.get('img').setValue(this.imagemURL);
+        if (!this.selectedFile) {
+            console.log("Nenhum arquivo selecionado.");
+            return;
         }
 
-        this.produtoService.save(this.produtoForm.value).subscribe(
-            () => {
-                this.messageService.show('Produto salvo com sucesso');
-                this.back();
-            },
-            error => this.messageService.show(error.error.message)
-        );
+        const reader = new FileReader();
+        reader.onload = () => {
+            const imagemURL = reader.result as string;
+
+            const produto: Produto = {
+                idProduto: this.produtoForm.get('idProduto').value,
+                descricao: this.produtoForm.get('descricao').value,
+                idProdutoExterno: this.produtoForm.get('idProdutoExterno').value,
+                qtdDisponivel: this.produtoForm.get('qtdDisponivel').value,
+                valorUn: this.produtoForm.get('valorUn').value,
+                idCategoria: this.produtoForm.get('idCategoria').value,
+                idTipoUnMedida: this.produtoForm.get('idTipoUnMedida').value,
+                status: this.produtoForm.get('status').value,
+                idEmpresa: parseInt(localStorage.getItem('idEmpresa')),
+                img: imagemURL,
+            };
+
+            // Use o serviço de produtos para enviar o objeto Produto para o servidor
+            if (this.produtoForm.get('idProduto').value == null) {
+                this.produtoService.new(produto).subscribe(
+                    () => {
+                        this.messageService.show('Produto salvo com sucesso');
+                        this.back();
+                    },
+                    error => this.messageService.show(error.error.message)
+                );
+            } else {
+                this.produtoService.save(produto).subscribe(
+                    () => {
+                        this.messageService.show('Produto salvo com sucesso');
+                        this.back();
+                    },
+                    error => this.messageService.show(error.error.message)
+                );
+            }
+        };
+
+        reader.readAsDataURL(this.selectedFile);
     }
+
+
 
     back(): void {
         this.router.navigate(['/admin/produto', 'produto']);
     }
+
+    novo(): void {
+        this.produtoForm.reset();
+        this.imagemURL = null;
+    }
+
 
 }

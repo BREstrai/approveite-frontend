@@ -10,5 +10,5 @@ export class Produto {
     idTipoUnMedida: number;
     qtdDisponivel: number;
     valorUn: number;
-    img: Byte[];
+    img: string;
 }
