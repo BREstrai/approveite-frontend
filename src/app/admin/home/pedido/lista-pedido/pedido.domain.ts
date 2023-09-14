@@ -3,6 +3,7 @@ export class Pedido {
     idEmpresa: number;
     dsCliente: string;
     idUsuarioEndereco: number;
+    idUsuario: number;
     dsEndereco: string;
     idFormaPagamento: number;
     dsFormaPagamento: string;

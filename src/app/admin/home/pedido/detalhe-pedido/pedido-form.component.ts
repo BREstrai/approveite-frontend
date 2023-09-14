@@ -31,6 +31,7 @@ export class PedidoFormComponent implements OnInit {
             idEmpresa: [null, Validators.required],
             dsCliente: [null, Validators.required],
             idUsuarioEndereco: [null, Validators.required],
+            idUsuario: [null, Validators.required],
             dsEndereco: [null, Validators.required],
             idFormaPagamento: [null, Validators.required],
             dsFormaPagamento: [null, Validators.required],
