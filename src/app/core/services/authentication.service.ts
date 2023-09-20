@@ -2,10 +2,6 @@ import {Injectable} from '@angular/core';
 import decode from 'jwt-decode';
 import {Router} from '@angular/router';
 
-/*
-    TODO
-    Ajustar para o Key correto do Projeto
- */
 const KEY = 'authTokenTemplate';
 
 @Injectable()

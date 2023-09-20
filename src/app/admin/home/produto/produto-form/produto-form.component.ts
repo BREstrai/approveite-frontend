@@ -48,7 +48,6 @@ export class ProdutoFormComponent implements OnInit {
         if (produto) {
             this.produtoForm.reset(produto);
             this.selectedFile = new File([this.dataURItoBlob(produto.img)], 'filename.jpg', { type: 'image/jpeg', lastModified: Date.now() });
-            console.log("Não", this.selectedFile);
             this.produtoForm.get('idCategoria').setValue(produto.idCategoria);
             this.produtoForm.get('idTipoUnMedida').setValue(produto.idTipoUnMedida);
 
@@ -80,7 +79,6 @@ export class ProdutoFormComponent implements OnInit {
             const reader = new FileReader();
             reader.onload = () => {
                 this.selectedFileBase64 = reader.result as string
-                console.log("Sim", this.selectedFileBase64);
             };
             reader.readAsDataURL(this.selectedFile);
         } else {
@@ -89,28 +87,15 @@ export class ProdutoFormComponent implements OnInit {
         }
     }
 
-
-    // onFileSelected(event: Event): void {
-    //     const inputElement = event.target as HTMLInputElement;
-    //     if (inputElement.files && inputElement.files.length > 0) {
-    //         this.selectedFile = inputElement.files[0];
-    //     } else {
-    //         this.selectedFile = null;
-    //     }
-    // }
-
-
     loadCategorias(): void {
         this.produtoService.findCategoriaAll().subscribe((categorias: Categoria[]) => {
             this.categorias = categorias;
-            console.log(this.categorias);
         });
     }
 
     loadTiposUnMedida(): void {
         this.produtoService.findUnMedidaAll().subscribe((tiposUnMedida: UnidadeMedida[]) => {
             this.tiposUnMedidas = tiposUnMedida;
-            console.log(this.tiposUnMedidas);
         });
     }
 
@@ -137,7 +122,6 @@ export class ProdutoFormComponent implements OnInit {
                 img: imagemURL,
             };
 
-            // Use o serviço de produtos para enviar o objeto Produto para o servidor
             if (this.produtoForm.get('idProduto').value == null) {
                 this.produtoService.new(produto).subscribe(
                     () => {

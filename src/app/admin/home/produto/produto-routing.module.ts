@@ -24,7 +24,7 @@ const routes: Routes = [
                 resolve: {
                     produto: ProdutoFormResolver
                 }
-            }
+            },
         ]
     }
 ];

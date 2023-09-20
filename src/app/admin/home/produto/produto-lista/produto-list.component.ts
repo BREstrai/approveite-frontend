@@ -29,4 +29,8 @@ export class ProdutoListComponent implements OnInit {
         this.router.navigate(['./', produto.idProduto], {relativeTo: this.route});
     }
 
+    add(): void {
+        this.router.navigate(['./0'], {relativeTo: this.route});       
+    }
+
 }

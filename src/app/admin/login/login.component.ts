@@ -54,6 +54,11 @@ export class LoginComponent implements OnInit {
 
             let idEmpresa = res.body.idEmpresa;
             localStorage.setItem('idEmpresa', idEmpresa);
+            
+            if (!idEmpresa) {
+                this.authenticationService.removeToken();
+                this.authenticationService.handleLogin();
+            }
 
         })).subscribe(value => {
             this.loading.done();

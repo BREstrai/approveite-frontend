@@ -13,5 +13,4 @@ export class ProdutoFormResolver implements Resolve<Produto> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Produto> {
         return this.produtoService.findOne(route.params.idProduto);
     }
-
 }
