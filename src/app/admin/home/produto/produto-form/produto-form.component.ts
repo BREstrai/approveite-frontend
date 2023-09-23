@@ -6,6 +6,7 @@ import { ProdutoService } from '../produto.service';
 import { UnidadeMedida } from '../../unidademedida/unidade-medida.domain';
 import { Categoria } from '../../categoria/categoria.domain';
 import { Produto } from '../produto.domain';
+import { Tags } from '../../tag/tag.domain';
 
 @Component({
     templateUrl: './produto-form.component.html',
@@ -19,6 +20,8 @@ export class ProdutoFormComponent implements OnInit {
     tiposUnMedidas: UnidadeMedida[];
     selectedFile: File | null = null;
     selectedFileBase64: string | null = null;
+    tags: Tags[] = [];
+    displayedColumns: string[] = ['idTag', 'dsTag', 'delete', 'editar'];
 
     constructor(private fb: FormBuilder,
         private route: ActivatedRoute,
@@ -38,7 +41,7 @@ export class ProdutoFormComponent implements OnInit {
             idTipoUnMedida: [null, Validators.required],
             qtdDisponivel: [null, Validators.required],
             valorUn: [null, Validators.required],
-            img: [null, Validators.required],
+            img: [Validators.required],
         });
 
         this.loadCategorias();
@@ -50,6 +53,7 @@ export class ProdutoFormComponent implements OnInit {
             this.selectedFile = new File([this.dataURItoBlob(produto.img)], 'filename.jpg', { type: 'image/jpeg', lastModified: Date.now() });
             this.produtoForm.get('idCategoria').setValue(produto.idCategoria);
             this.produtoForm.get('idTipoUnMedida').setValue(produto.idTipoUnMedida);
+            this.tags = produto.tags;            
 
             const fileReader = new FileReader();
             fileReader.onload = (event) => {
@@ -120,6 +124,7 @@ export class ProdutoFormComponent implements OnInit {
                 status: this.produtoForm.get('status')?.value ? true : false,
                 idEmpresa: parseInt(localStorage.getItem('idEmpresa')),
                 img: imagemURL,
+                tags: this.tags,
             };
 
             if (this.produtoForm.get('idProduto').value == null) {

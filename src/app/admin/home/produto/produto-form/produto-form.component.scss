@@ -13,3 +13,9 @@
 .upload-button:hover {
     background-color: #1976d2;
 }
+
+.scrollable-table {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+}

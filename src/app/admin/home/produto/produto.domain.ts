@@ -1,8 +1,8 @@
-import { Byte } from "@angular/compiler/src/util";
+import { Tags } from '../tag/tag.domain';
 
 export class Produto {
     idProduto: number;
-    descricao: number;
+    descricao: string;
     idProdutoExterno: number;
     status: boolean;
     idEmpresa: number;
@@ -11,4 +11,5 @@ export class Produto {
     qtdDisponivel: number;
     valorUn: number;
     img: string;
+    tags: Tags[];
 }

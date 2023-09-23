@@ -29,8 +29,6 @@
                         <input matInput placeholder="Valor" formControlName="valorUn">
                     </mat-form-field>
                 </app-input>
-
-
                 <app-input name="Categoria" class="col-6">
                     <mat-form-field>
                         <mat-label>Categoria</mat-label>
@@ -57,7 +55,7 @@
                 <app-input name="Status" class="col-12">
                     <mat-checkbox formControlName="status">Produto Ativo</mat-checkbox>
                 </app-input>
-                <div>
+                <div class="col-6">
                     <img [src]="selectedFileBase64" height="300" width="300" alt="Imagem" *ngIf="selectedFileBase64">
 
                     <label for="file-upload" class="upload-button">
@@ -65,6 +63,53 @@
                     </label>
                     <input id="file-upload" type="file" class="file-input" formControlName="img"
                         [files]="[selectedFile]" (change)="onFileSelected($event)">
+                </div>
+
+                <div class="col-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Tags do Produto</mat-label>
+                        <input matInput placeholder="Ex: Vencido" value="">                        
+                    </mat-form-field>                    
+                    <button mat-button>
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                    <div class="scrollable-table">
+                        <mat-table [dataSource]="tags">
+                            <ng-container matColumnDef="idTag">
+                                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                                <mat-cell *matCellDef="let tag"> {{tag.idTag}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="dsTag">
+                                <mat-header-cell *matHeaderCellDef> Tag </mat-header-cell>
+                                <mat-cell *matCellDef="let tag"> {{tag.dsTag}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="delete">
+                                <mat-header-cell *matHeaderCellDef>Deletar</mat-header-cell>
+                                <mat-cell *matCellDef="let tag" class="text-center">
+                                    <div>
+                                        <button mat-button>
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="editar">
+                                <mat-header-cell *matHeaderCellDef>Editar</mat-header-cell>
+                                <mat-cell *matCellDef="let tag" class="text-center">
+                                    <div>
+                                        <button mat-button>
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns, sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                    </div>
                 </div>
 
             </div>

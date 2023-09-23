@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
     imports: [
         SharedModule,
         ProdutoRoutingModule,
-        MatSelectModule
+        MatSelectModule,
     ],
     providers: [
         ProdutoService,
