@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from '../../../../shared/services/message.service';
@@ -14,6 +14,7 @@ import { Tags } from '../../tag/tag.domain';
 })
 export class ProdutoFormComponent implements OnInit {
 
+    tagValue: string;
     produtoForm: FormGroup;
     imagemURL: string;
     categorias: Categoria[];
@@ -21,13 +22,15 @@ export class ProdutoFormComponent implements OnInit {
     selectedFile: File | null = null;
     selectedFileBase64: string | null = null;
     tags: Tags[] = [];
-    displayedColumns: string[] = ['idTag', 'dsTag', 'delete', 'editar'];
+    displayedColumns: string[] = ['idTag', 'dsTag', 'delete'];
 
     constructor(private fb: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private produtoService: ProdutoService,
-        private messageService: MessageService) {
+        private messageService: MessageService,
+        private ngZone: NgZone
+        ) {
     }
 
     ngOnInit(): void {
@@ -53,7 +56,7 @@ export class ProdutoFormComponent implements OnInit {
             this.selectedFile = new File([this.dataURItoBlob(produto.img)], 'filename.jpg', { type: 'image/jpeg', lastModified: Date.now() });
             this.produtoForm.get('idCategoria').setValue(produto.idCategoria);
             this.produtoForm.get('idTipoUnMedida').setValue(produto.idTipoUnMedida);
-            this.tags = produto.tags;            
+            this.tags = produto.tags;
 
             const fileReader = new FileReader();
             fileReader.onload = (event) => {
@@ -61,6 +64,21 @@ export class ProdutoFormComponent implements OnInit {
             };
             fileReader.readAsDataURL(this.selectedFile);
         }
+    }
+
+    newTag(): void {
+        const tag: Tags = {
+            idTag: null,
+            idProduto: this.produtoForm.get('idProduto').value,
+            dsTag: this.tagValue,
+        };
+
+        this.produtoService.newTag(tag).subscribe(
+            (response: Tags) => {
+                this.messageService.show('Tag ' + response.dsTag + ' adicionada com sucesso');
+                window.location.reload();
+            }
+        );
     }
 
     dataURItoBlob(dataURI: string): Blob {
@@ -149,7 +167,16 @@ export class ProdutoFormComponent implements OnInit {
         reader.readAsDataURL(this.selectedFile);
     }
 
-
+    delete(tag: Tags): void {
+        const productId = this.produtoForm.get('idProduto').value;
+        console.log(productId);
+        
+        this.produtoService.deleteTag(tag.idTag).subscribe(
+            (response: Tags[]) => {
+                this.tags = response;
+            }
+        );
+    }
 
     back(): void {
         this.router.navigate(['/admin/produto', 'produto']);
@@ -161,6 +188,5 @@ export class ProdutoFormComponent implements OnInit {
         this.selectedFile = null
         this.selectedFileBase64 = null;
     }
-
 
 }

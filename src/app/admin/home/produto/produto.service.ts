@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { Produto } from "./produto.domain";
 import { Categoria } from "../categoria/categoria.domain";
 import { UnidadeMedida } from "../unidademedida/unidade-medida.domain";
+import { Tags } from "../tag/tag.domain";
 
 @Injectable()
 export class ProdutoService {
@@ -33,13 +34,19 @@ export class ProdutoService {
     }
 
     save(domain: Produto): Observable<Produto> {
-        console.log(domain);
         return this.http.put(this.URL_API.concat('/update'), domain) as Observable<Produto>;
     }
 
+    deleteTag(id: number): Observable<Tags[]> {
+        return this.http.get(environment.api_url+'/tag/delete/'+id) as Observable<Tags[]>;
+    }
+
     new(domain: Produto): Observable<Produto> {
-        console.log(domain);
         return this.http.post(this.URL_API.concat('/create'), domain) as Observable<Produto>;
+    }
+
+    newTag(tag: Tags) {
+        return this.http.post(environment.api_url.concat('/tag/create'), tag) as Observable<Tags>;
     }
 
 }

@@ -6,6 +6,7 @@ import { ProdutoService } from './produto.service';
 import { ProdutoListComponent } from './produto-lista/produto-list.component';
 import { ProdutoFormComponent } from './produto-form/produto-form.component';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [ProdutoListComponent, ProdutoFormComponent],
@@ -13,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
         SharedModule,
         ProdutoRoutingModule,
         MatSelectModule,
+        FormsModule,
     ],
     providers: [
         ProdutoService,

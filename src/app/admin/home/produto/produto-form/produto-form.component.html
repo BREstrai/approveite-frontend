@@ -66,13 +66,16 @@
                 </div>
 
                 <div class="col-6">
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Tags do Produto</mat-label>
-                        <input matInput placeholder="Ex: Vencido" value="">                        
-                    </mat-form-field>                    
-                    <button mat-button>
-                        <mat-icon>add_circle</mat-icon>
-                    </button>
+                    <form (ngSubmit)="newTag()">
+                        <mat-form-field class="example-full-width">
+                            <mat-label class="col-3"></mat-label>
+                            <input matInput placeholder="Ex: Vencido" [(ngModel)]="tagValue" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                        <button mat-button type="submit">
+                            <mat-icon>add_circle</mat-icon>
+                        </button>
+                    </form>
+
                     <div class="scrollable-table">
                         <mat-table [dataSource]="tags">
                             <ng-container matColumnDef="idTag">
@@ -89,19 +92,8 @@
                                 <mat-header-cell *matHeaderCellDef>Deletar</mat-header-cell>
                                 <mat-cell *matCellDef="let tag" class="text-center">
                                     <div>
-                                        <button mat-button>
+                                        <button mat-button (click)="delete(tag)">
                                             <mat-icon>delete</mat-icon>
-                                        </button>
-                                    </div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="editar">
-                                <mat-header-cell *matHeaderCellDef>Editar</mat-header-cell>
-                                <mat-cell *matCellDef="let tag" class="text-center">
-                                    <div>
-                                        <button mat-button>
-                                            <mat-icon>edit</mat-icon>
                                         </button>
                                     </div>
                                 </mat-cell>
