@@ -1,37 +1,69 @@
 <div class="container-main">
-    <mat-toolbar style="background-color: rgb(239, 250, 249);" class="justify-content-between">
-        <span class="logo"><strong class="">Approveite</strong></span>
-        <button mat-icon-button type="button" (click)="logOut()" matTooltip="Sair" matTooltipPosition="above">
-            <mat-icon>login</mat-icon>
-        </button>
-    </mat-toolbar>
-    <mat-drawer-container class="container-drawer">
-        <mat-drawer class="menu-side" mode="side" opened>
-            <p class="nav-group-title" matLine>Empresa</p>
-            <mat-nav-list>
-                <a mat-list-item routerLink="/admin/empresa" routerLinkActive="active">
-                    <mat-icon mat-list-icon>receipt_long</mat-icon>
-                    <p mat-line>Configurações da Empresa</p>
-                </a>
-            </mat-nav-list>
-            <p class="nav-group-title" matLine>Pedidos</p>
-            <mat-nav-list>
-                <a mat-list-item routerLink="/admin/pedido" routerLinkActive="active">
-                    <mat-icon mat-list-icon>receipt_long</mat-icon>
-                    <p mat-line>Pedidos</p>
-                </a>
-            </mat-nav-list>
-            <p class="nav-group-title" matLine>Produtos</p>
-            <mat-nav-list>
-                <a mat-list-item routerLink="/admin/produto" routerLinkActive="active">
-                    <mat-icon mat-list-icon>receipt_long</mat-icon>
-                    <p mat-line>Cadastro de Produtos</p>
-                </a>
-            </mat-nav-list>
-            <app-app-info class="fixed-bottom-info"></app-app-info>
-        </mat-drawer>
-        <mat-drawer-content class="container-content">
-            <router-outlet></router-outlet>
-        </mat-drawer-content>
-    </mat-drawer-container>
+	<mat-toolbar
+		style="background-color: rgb(239, 250, 249)"
+		class="justify-content-between"
+	>
+		<span class="logo"><strong class="">Approveite</strong></span>
+		<button
+			mat-icon-button
+			type="button"
+			(click)="logOut()"
+			matTooltip="Sair"
+			matTooltipPosition="above"
+		>
+			<mat-icon>login</mat-icon>
+		</button>
+	</mat-toolbar>
+	<mat-drawer-container class="container-drawer">
+		<mat-drawer class="menu-side" mode="side" opened>
+			<p class="nav-group-title" matLine>Empresa</p>
+			<mat-nav-list>
+				<a
+					mat-list-item
+					routerLink="/admin/empresa"
+					routerLinkActive="active"
+				>
+					<mat-icon mat-list-icon>store_mall_directory</mat-icon>
+					<p mat-line>Configurações da Empresa</p>
+				</a>
+			</mat-nav-list>
+			<p class="nav-group-title" matLine>Pedidos</p>
+			<mat-nav-list>
+				<a
+					mat-list-item
+					routerLink="/admin/pedido"
+					routerLinkActive="active"
+				>
+					<mat-icon mat-list-icon>receipt_long</mat-icon>
+					<p mat-line>Pedidos</p>
+				</a>
+			</mat-nav-list>
+			<p class="nav-group-title" matLine>Produtos</p>
+			<mat-nav-list>
+				<a
+					mat-list-item
+					routerLink="/admin/produto"
+					routerLinkActive="active"
+				>
+					<mat-icon mat-list-icon>local_offer</mat-icon>
+					<p mat-line>Cadastro de Produtos</p>
+				</a>
+			</mat-nav-list>
+			<p class="nav-group-title" matLine>Relatórios e Gráficos</p>
+			<mat-nav-list>
+				<a
+					mat-list-item
+					routerLink="/admin/relatorio"
+					routerLinkActive="active"
+				>
+					<mat-icon mat-list-icon>library_books</mat-icon>
+					<p mat-line>Relatórios</p>
+				</a>
+			</mat-nav-list>
+			<app-app-info class="fixed-bottom-info"></app-app-info>
+		</mat-drawer>
+		<mat-drawer-content class="container-content">
+			<router-outlet></router-outlet>
+		</mat-drawer-content>
+	</mat-drawer-container>
 </div>

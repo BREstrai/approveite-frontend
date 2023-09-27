@@ -14,9 +14,13 @@ const routes: Routes = [
         path: 'produto',
         loadChildren: () => import('./produto/produto.module').then(module => module.ProdutoModule)
     },
+	{
+        path: 'relatorio',
+        loadChildren: () => import('./relatorio/relatorio.module').then(module => module.RelatorioModule)
+    },
     {
         path: '',
-        redirectTo: 'pedido',
+        redirectTo: 'relatorio',
         pathMatch: 'full'
     },
     {
