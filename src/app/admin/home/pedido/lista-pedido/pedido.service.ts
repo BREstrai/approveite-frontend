@@ -17,7 +17,8 @@ export class PedidoService {
     }
 
     findAll(): Observable<Pedido[]> {
-        return this.http.get(this.URL_API.concat('/findAll')) as Observable<Pedido[]>;
+		var idEmpresa = localStorage.getItem('idEmpresa');
+        return this.http.get(this.URL_API.concat('/findAllByEmpresa/'.concat(idEmpresa))) as Observable<Pedido[]>;
     }
     
     findDetByPedido(idPedido: number): Observable<PedidoCompleto> {
@@ -42,6 +43,7 @@ export class PedidoService {
             observer.next(mock);
             observer.complete();
         });
+		
         return simpleObservable;
     }
 

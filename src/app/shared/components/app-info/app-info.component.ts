@@ -12,7 +12,7 @@ export class AppInfoComponent implements OnInit {
     @Input() textClass = 'text-primary';
     @Input() showLogo = true;
 
-    version = '0.0.0';
+    version = '';
 
     constructor(private appInfoService: AppInfoService) {
     }

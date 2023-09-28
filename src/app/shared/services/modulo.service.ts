@@ -11,8 +11,4 @@ export class ModuloService {
     constructor(private http: HttpClient) {
     }
 
-    isLiberado(): Observable<boolean> {
-        return this.http.get<boolean>(this.URL_API);
-    }
-
 }

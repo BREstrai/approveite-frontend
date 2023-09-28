@@ -1,0 +1,41 @@
+<div>
+	<mat-form-field class="date-input">
+		<mat-label>Data Inicial</mat-label>
+		<input matInput [(ngModel)]="dataInicial" #dateInicial />
+		<mat-datepicker-toggle
+			matSuffix
+			[for]="dateInicialPicker"
+		></mat-datepicker-toggle>
+		<mat-datepicker #dateInicialPicker></mat-datepicker>
+	</mat-form-field>
+
+	<mat-form-field class="date-input">
+		<mat-label>Data Final</mat-label>
+		<input matInput [(ngModel)]="dataFinal" #dateFinal />
+		<mat-datepicker-toggle
+			matSuffix
+			[for]="dateFinalPicker"
+		></mat-datepicker-toggle>
+		<mat-datepicker #dateFinalPicker></mat-datepicker>
+	</mat-form-field>
+
+	<mat-form-field class="date-input">
+		<mat-label>Categoria</mat-label>
+		<mat-select>
+			<mat-option
+				*ngFor="let categoria of categorias"
+				[value]="categoria.idCategoria"
+				>{{ categoria.descricao }}</mat-option
+			>
+		</mat-select>
+	</mat-form-field>
+	<button mat-raised-button color="primary" class="button-space" (click)="carregarDados()">
+		Carregar
+	</button>
+	<button mat-raised-button color="accent" class="button-space">
+		Gerar relatório
+	</button>
+</div>
+<div>
+	<canvas #grafico> </canvas>
+</div>

@@ -20,7 +20,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'relatorio',
+        redirectTo: 'relatorio/dashborad',
         pathMatch: 'full'
     },
     {

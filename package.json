@@ -1,6 +1,6 @@
 {
   "name": "approveite-frontend",
-  "version": "0.0.0",
+  "version": "1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --optimization=false",
@@ -23,10 +23,13 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "bootstrap": "^4.5.0",
+    "chart.js": "^2.9.3",
     "jspdf": "^2.5.1",
     "jwt-decode": "^2.2.0",
+    "ng2-charts": "^2.4.3",
     "ngx-mask": "^14.2.0",
     "rxjs": "~6.6.0",
+    "text-mask-core": "^5.1.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
