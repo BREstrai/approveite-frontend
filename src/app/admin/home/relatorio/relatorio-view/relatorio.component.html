@@ -1,2 +1,71 @@
-<button mat-raised-button color="secondary" (click)="closeRelatorio()">Fechar</button>
-<button mat-raised-button color="primary" (click)="downloadPDF()">Baixar relatório</button>
+<div #conteudoPDF>
+	<mat-accordion>
+		<mat-expansion-panel *ngFor="let pedido of dataSourceMestre.data" [expanded]="paineisExpansaoAbertos">
+			<mat-expansion-panel-header>
+				Pedido #{{ pedido.pedido.idPedido }} - Data do Pedido:
+				{{ pedido.pedido.dataPedido | date : "dd/MM/yyyy HH:mm" }} -
+				Valor Total: R$ {{ pedido.pedido.valTotal | number : "1.2-2" }}
+			</mat-expansion-panel-header>
+			<mat-table
+				[dataSource]="getDataSourceDetalhe(pedido.pedido.idPedido)"
+			>
+				<ng-container matColumnDef="produto">
+					<mat-header-cell *matHeaderCellDef>
+						Produto
+					</mat-header-cell>
+					<mat-cell *matCellDef="let detalhe">
+						{{ detalhe.descricaoProduto }}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="descricaoProduto">
+					<mat-header-cell *matHeaderCellDef>
+						Descrição do Produto
+					</mat-header-cell>
+					<mat-cell *matCellDef="let detalhe">
+						{{ detalhe.descricaoProduto }}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="qtdItem">
+					<mat-header-cell *matHeaderCellDef>
+						Quantidade
+					</mat-header-cell>
+					<mat-cell *matCellDef="let detalhe">
+						{{ detalhe.qtdItem }}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="valUnitario">
+					<mat-header-cell *matHeaderCellDef>
+						Valor Unitário
+					</mat-header-cell>
+					<mat-cell *matCellDef="let detalhe">
+						R$ {{ detalhe.valUnitario | number : "1.2-2" }}
+					</mat-cell>
+				</ng-container>
+
+				<mat-header-row
+					*matHeaderRowDef="[
+						'produto',
+						'descricaoProduto',
+						'qtdItem',
+						'valUnitario'
+					]"
+				></mat-header-row>
+				<mat-row
+					*matRowDef="
+						let row;
+						columns: [
+							'produto',
+							'descricaoProduto',
+							'qtdItem',
+							'valUnitario'
+						]
+					"
+				></mat-row>
+			</mat-table>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>
+<button mat-button (click)="gerarPDF()">Gerar PDF</button>

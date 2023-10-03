@@ -21,7 +21,7 @@
 
 	<mat-form-field class="date-input">
 		<mat-label>Categoria</mat-label>
-		<mat-select>
+		<mat-select (selectionChange)="setCategoria($event.value)">
 			<mat-option
 				*ngFor="let categoria of categorias"
 				[value]="categoria.idCategoria"
@@ -32,7 +32,7 @@
 	<button mat-raised-button color="primary" class="button-space" (click)="carregarDados()">
 		Carregar
 	</button>
-	<button mat-raised-button color="accent" class="button-space">
+	<button mat-raised-button color="accent" class="button-space" (click)="gerarRelatorio()">
 		Gerar relatório
 	</button>
 </div>

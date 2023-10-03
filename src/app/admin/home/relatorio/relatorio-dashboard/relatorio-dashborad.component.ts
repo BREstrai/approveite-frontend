@@ -5,11 +5,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { conformToMask } from 'text-mask-core';
 import { dateMask } from '../../../../shared/components/date-mask/date-mask';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { Chart, ChartScales, ChartOptions } from 'chart.js';
+import { Chart } from 'chart.js';
 import { RelatorioService } from '../relatorio.service';
 import { Categoria } from '../../categoria/categoria.domain';
 import { FormBuilder } from '@angular/forms';
 import { FiltroGrafico } from './filtro.domain';
+import { PedidoCompleto } from '../../pedido/pedido-completo.domain';
+import { RelatorioComponent } from '../relatorio-view/relatorio.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { DetalhePedido } from '../../pedido/detalhe-pedido/detalhe-pedido.domain';
 
 @Component({
 	selector: 'app-relatorio-dashboard',
@@ -24,17 +28,21 @@ export class RelatorioDashboardComponent implements OnInit {
 	@ViewChild('dateFinalPicker') dateFinalPicker: MatDatepicker<Date>;
 	@ViewChild('grafico', { static: true }) grafico: ElementRef;
 
+	data: PedidoCompleto[] = [];
+	dataSourceDetalhe = new MatTableDataSource<DetalhePedido>();
+
 	labelGrafico: string[] = [];
 	dataGrafico: any[] = [];
-
 
 	documento = new jsPDF();
 
 	categorias: Categoria[];
 	categoriaSelecionada: Categoria;
 
+	idCategoria: number;
 	public dataInicial: string;
 	public dataFinal: string;
+
 
 	constructor(
 		private fb: FormBuilder,
@@ -59,8 +67,6 @@ export class RelatorioDashboardComponent implements OnInit {
 		this.createChart();
 	}
 
-
-
 	ngAfterViewInit() {
 		const inputInicial = this.dateInicial.nativeElement;
 		inputInicial.addEventListener('input', (event) => {
@@ -77,21 +83,18 @@ export class RelatorioDashboardComponent implements OnInit {
 
 	createChart() {
 		const chart = new Chart(this.grafico.nativeElement, {
-			type: 'bar', // Tipo de gráfico de barras
+			type: 'bar',
 			data: {
-				labels: this.labelGrafico, // Rótulos no eixo X (datas)
-				datasets: this.dataGrafico, // Dados dos gráficos
+				labels: this.labelGrafico,
+				datasets: this.dataGrafico,
 			},
 			options: {
 				responsive: true,
 				scales: {
 					xAxes: [{
-						type: 'time', // Defina o tipo do eixo X para 'time' se estiver usando datas
 						time: {
-							unit: 'day', // Unidade de tempo, como 'day' para exibir datas diárias
 						},
 					}],
-					// Outras opções de escala, como o eixo Y
 				},
 			},
 		});
@@ -108,6 +111,33 @@ export class RelatorioDashboardComponent implements OnInit {
 		return color;
 	}
 
+	setCategoria(categoria: number): void {
+	
+		this.idCategoria = categoria;
+	}
+
+	gerarRelatorio(): void {
+
+		let filtro = new FiltroGrafico();
+		filtro.dataInicial = this.converterDataParaUTC(this.dataInicial);
+		filtro.dataFinal = this.converterDataParaUTC(this.dataFinal);
+		filtro.idCategoria = this.idCategoria ? this.idCategoria : 0;
+		filtro.idEmpresa = parseInt(localStorage.getItem('idEmpresa'));
+			
+		this.relatorioService.getRelatorio(filtro)
+		.subscribe((relatorioData: PedidoCompleto[]) => {
+			this.data = relatorioData;
+			console.log(this.data);
+
+			const dialogRef = this.modal.open(RelatorioComponent, {
+				width: '90%',
+				height: '90%',				
+				data: this.data
+			});
+		});
+
+	}
+
 	carregarDados(): void {
 		let filtro: FiltroGrafico = new FiltroGrafico();
 
@@ -117,11 +147,9 @@ export class RelatorioDashboardComponent implements OnInit {
 		filtro.idEmpresa = parseInt(localStorage.getItem('idEmpresa'));
 
 		this.relatorioService.getVendasPeriodo(filtro).subscribe((data) => {
-			// Inicialize os arrays de labels e datasets
 			this.labelGrafico = [];
 			this.dataGrafico = [];
 
-			// Crie um objeto de mapeamento para rastrear os índices das categorias e suas cores
 			const categoriaInfo: { [descricao: string]: { index: number; borderColor: string; backgroundColor: string } } = {};
 
 			data.forEach((item) => {
@@ -129,18 +157,15 @@ export class RelatorioDashboardComponent implements OnInit {
 				const total = item.total;
 				const dataVenda = new Date(item.data);
 
-				// Use a data formatada como rótulo no eixo x
-				const dataFormatada = dataVenda.toISOString().split('T')[0]; // Pega apenas a parte da data
+				const dataFormatada = dataVenda.toISOString().split('T')[0];
 
-				// Use a descrição da categoria como chave para rastrear os índices
 				const chaveCategoria = descricao.toLowerCase();
-
-				// Use a descrição da categoria como rótulo se não existir nos labels
+				
 				if (!categoriaInfo[chaveCategoria]) {
 					categoriaInfo[chaveCategoria] = {
 						index: this.labelGrafico.length,
 						borderColor: this.getRandomColor(),
-						backgroundColor: this.getRandomColor(), // Defina uma cor de preenchimento aleatória
+						backgroundColor: this.getRandomColor(),
 					};
 
 					this.labelGrafico.push(dataFormatada);
@@ -148,15 +173,13 @@ export class RelatorioDashboardComponent implements OnInit {
 						label: descricao,
 						data: [],
 						borderColor: categoriaInfo[chaveCategoria].borderColor,
-						backgroundColor: categoriaInfo[chaveCategoria].backgroundColor, // Use a cor de preenchimento
-						fill: true, // Preencher a área sob as barras
+						backgroundColor: categoriaInfo[chaveCategoria].backgroundColor,
+						fill: true,
 					});
 				}
 
-				// Encontre o índice da categoria
 				const categoriaIndex = categoriaInfo[chaveCategoria].index;
 
-				// Adicione os dados ao conjunto de dados correto
 				this.dataGrafico[categoriaIndex].data.push({
 					x: dataFormatada,
 					y: total,

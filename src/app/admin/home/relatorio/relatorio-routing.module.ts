@@ -5,7 +5,7 @@ import { RelatorioDashboardComponent } from './relatorio-dashboard/relatorio-das
 
 const routes: Routes = [
     {
-        path: 'relatorio',
+        path: 'dashboard/relatorio',
         pathMatch: 'full',
         component: RelatorioComponent
     },
