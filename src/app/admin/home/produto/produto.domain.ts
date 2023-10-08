@@ -11,5 +11,4 @@ export class Produto {
     qtdDisponivel: number;
     valorUn: number;
     img: string;
-    tags: Tags[];
 }

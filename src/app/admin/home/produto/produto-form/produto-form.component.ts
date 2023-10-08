@@ -55,8 +55,13 @@ export class ProdutoFormComponent implements OnInit {
             this.produtoForm.reset(produto);
             this.selectedFile = new File([this.dataURItoBlob(produto.img)], 'filename.jpg', { type: 'image/jpeg', lastModified: Date.now() });
             this.produtoForm.get('idCategoria').setValue(produto.idCategoria);
-            this.produtoForm.get('idTipoUnMedida').setValue(produto.idTipoUnMedida);
-            this.tags = produto.tags;
+            this.produtoForm.get('idTipoUnMedida').setValue(produto.idTipoUnMedida);        
+
+			this.produtoService.getTags(produto.idProduto).subscribe(
+				(response: Tags[]) => {
+					this.tags = response;
+				}
+			);
 
             const fileReader = new FileReader();
             fileReader.onload = (event) => {
@@ -142,8 +147,9 @@ export class ProdutoFormComponent implements OnInit {
                 status: this.produtoForm.get('status')?.value ? true : false,
                 idEmpresa: parseInt(localStorage.getItem('idEmpresa')),
                 img: imagemURL,
-                tags: this.tags,
             };
+
+			
 
             if (this.produtoForm.get('idProduto').value == null) {
                 this.produtoService.new(produto).subscribe(

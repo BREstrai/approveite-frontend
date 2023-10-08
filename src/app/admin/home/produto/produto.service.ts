@@ -49,4 +49,7 @@ export class ProdutoService {
         return this.http.post(environment.api_url.concat('/tag/create'), tag) as Observable<Tags>;
     }
 
+	getTags(idProduto: number): Observable<Tags[]> {
+		return this.http.get(environment.api_url.concat(`/tag/findAll/byProduto/${idProduto}`)) as Observable<Tags[]>;
+	}
 }
