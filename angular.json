@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cisstrack": {
+    "approveite": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cisstrack",
+            "outputPath": "dist/approveite",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cisstrack:build"
+            "browserTarget": "approveite:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cisstrack:build:production"
+              "browserTarget": "approveite:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cisstrack:build"
+            "browserTarget": "approveite:build"
           }
         },
         "test": {
@@ -122,11 +122,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cisstrack:serve"
+            "devServerTarget": "approveite:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cisstrack:serve:production"
+              "devServerTarget": "approveite:serve:production"
             }
           }
         }

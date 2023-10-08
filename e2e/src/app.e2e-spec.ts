@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('cisstrack app is running!');
+    expect(page.getTitleText()).toEqual('approveite app is running!');
   });
 
   afterEach(async () => {
